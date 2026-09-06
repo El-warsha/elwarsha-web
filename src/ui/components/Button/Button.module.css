@@ -1,0 +1,28 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 600 1rem/1 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}

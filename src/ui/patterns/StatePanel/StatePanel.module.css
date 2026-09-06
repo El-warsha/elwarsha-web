@@ -1,0 +1,9 @@
+.panel {
+  padding: var(--space-4);
+  background: var(--paper-deep);
+  border: 1px dashed var(--brass-deep);
+}
+
+.panel p {
+  margin: 0.4rem 0 0;
+}

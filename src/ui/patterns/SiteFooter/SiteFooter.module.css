@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-body);
+}
+
+.footer p {
+  margin: 0;
+}

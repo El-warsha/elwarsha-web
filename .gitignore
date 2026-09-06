@@ -1,0 +1,16 @@
+node_modules
+dist
+storybook-static
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*
+.env
+.env.local
+*.log
+*.tsbuildinfo
+coverage
+.DS_Store
+playwright-report
+test-results
+*.csv
