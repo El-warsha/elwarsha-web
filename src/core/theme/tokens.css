@@ -1,23 +1,66 @@
 :root {
-  --font-display: "Fraunces", "IBM Plex Sans Arabic", serif;
-  --font-body: "IBM Plex Sans Arabic", "IBM Plex Sans", sans-serif;
-  --ink: #1b120b;
-  --paper: #f3e6cf;
-  --paper-deep: #e7d3ae;
-  --brass: #b4531a;
-  --brass-deep: #7c2d12;
-  --moss: #3f4f2f;
-  --line: rgba(27, 18, 11, 0.16);
-  --focus: #0f3d2e;
-  --space-1: 0.35rem;
-  --space-2: 0.7rem;
-  --space-3: 1.2rem;
-  --space-4: 2rem;
-  --space-5: 4.5rem;
+  /* ElWarsha Design System v4 Field Notes (Figma Cover + bound variables).
+     This file has no separate Foundations page; these are the foundation tokens. */
+
+  --color-text-primary: #25231e;
+  --color-text-secondary: #6f685b;
+  --color-text-brand: #c9431f;
+  --color-text-success: #1f5c34;
+  --color-text-on-action: #fffdf6;
+  --color-text-on-brand: #fffdf6;
+
+  --color-bg-canvas: #f2eddf;
+  --color-surface-default: #fffdf6;
+  --color-surface-muted: #fff9e7;
+  --color-surface-elevated: #fff9e7;
+  --color-surface-brand: #fdefe9;
+  --color-surface-success: #d8f0d5;
+
+  --color-border-default: #25231e;
+  --color-action-primary: #25231e;
+  --color-brand-primary: #ed5c3a;
+
+  --spacing-4: 0.25rem;
+  --spacing-8: 0.5rem;
+  --spacing-12: 0.75rem;
+  --spacing-16: 1rem;
+  --spacing-24: 1.5rem;
+
+  --radius-md: 2px;
+  --radius-full: 999px;
+
+  --size-border-thin: 1px;
+  --size-button-sm: 36px;
+  --size-button-md: 44px;
+  --size-button-lg: 52px;
+  --size-input: 44px;
+
+  --shadow-hard: 4px 4px 0 #25231e;
+  --shadow-paper: 0 22px 50px rgb(69 56 31 / 0.14);
   --shadow-none: none;
+
+  --font-display: "Manrope", "IBM Plex Sans Arabic", sans-serif;
+  --font-display-italic: "Newsreader", "IBM Plex Sans Arabic", serif;
+  --font-body: "DM Sans", "IBM Plex Sans Arabic", sans-serif;
+  --font-mono: "DM Mono", "IBM Plex Sans Arabic", monospace;
+
+  /* Aliases for modules written against the workshop starter names. */
+  --ink: var(--color-text-primary);
+  --paper: var(--color-bg-canvas);
+  --paper-deep: var(--color-surface-muted);
+  --brass: var(--color-brand-primary);
+  --brass-deep: var(--color-text-brand);
+  --moss: var(--color-text-success);
+  --line: color-mix(in srgb, var(--color-border-default) 16%, transparent);
+  --focus: var(--color-text-success);
+  --space-1: var(--spacing-4);
+  --space-2: var(--spacing-8);
+  --space-3: var(--spacing-16);
+  --space-4: var(--spacing-24);
+  --space-5: 4.5rem;
 }
 
 html[data-theme="workshop"] {
-  color: var(--ink);
-  background: var(--paper);
+  color: var(--color-text-primary);
+  background: var(--color-bg-canvas);
 }

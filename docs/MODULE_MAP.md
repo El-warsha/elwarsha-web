@@ -1,15 +1,19 @@
 # Module map
 
-| Feature       | Surface                  | Foundation status    |
-| ------------- | ------------------------ | -------------------- |
-| Home          | `/ar`, `/en`             | Complete public page |
-| Initiative    | `/ar/initiative`         | Complete public page |
-| Roadmap       | `/ar/roadmap`            | Complete public page |
-| Participation | `/ar/participation`      | Complete public page |
-| FAQ           | `/ar/faq`                | Complete public page |
-| Dashboard     | `/ar/portal`             | Fixture shell        |
-| Products      | `/ar/portal/products`    | Fixture shell        |
-| Cohorts       | `/ar/portal/cohorts`     | Fixture shell        |
-| Assignments   | `/ar/portal/assignments` | Fixture shell        |
-| Submissions   | `/ar/portal/submissions` | Unavailable seam     |
-| Reviews       | `/ar/portal/reviews`     | Unavailable seam     |
+Portal v1 is defined in [`product/PORTAL.md`](product/PORTAL.md). Status below
+is foundation code versus that spec.
+
+| Feature       | Surface                     | Foundation status    | v1 portal                          |
+| ------------- | --------------------------- | -------------------- | ---------------------------------- |
+| Home          | `/ar`, `/en`                | Complete public page | Unchanged                          |
+| Initiative    | `/ar/initiative`            | Complete public page | Unchanged                          |
+| Roadmap       | `/ar/roadmap`               | Complete public page | Unchanged                          |
+| Participation | `/ar/participation`         | Complete public page | Unchanged                          |
+| FAQ           | `/ar/faq`                   | Complete public page | Unchanged                          |
+| This week     | `/ar/portal`                | Fixture shell        | Build (status + details + assignment) |
+| Weeks         | `/ar/portal/weeks`          | Missing              | Build (current + previous)         |
+| Products      | `/ar/portal/products`       | Fixture shell        | Redirect to This week              |
+| Cohorts       | `/ar/portal/cohorts`        | Fixture shell        | Redirect to This week              |
+| Assignments   | `/ar/portal/assignments`    | Fixture shell        | Redirect to Weeks                  |
+| Submissions   | `/ar/portal/submissions`    | Unavailable seam     | Redirect to This week              |
+| Reviews       | `/ar/portal/reviews`        | Unavailable seam     | Redirect to This week              |
