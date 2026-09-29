@@ -1,4 +1,4 @@
-import { assignmentsRoute } from "@features/assignments";
+import { assignmentsRoute } from "@features/tasks";
 import { cohortsRoute } from "@features/cohorts";
 import { faqRoute } from "@features/faq";
 import { homeRoute } from "@features/home";
