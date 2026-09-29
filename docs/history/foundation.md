@@ -3,7 +3,7 @@
 ## 2026-09-06 — Initial web foundation
 
 User request: implement the bilingual React starter against the NestJS API
-plan, using Yarn 4 and the crm-mobile feature-sliced boundaries.
+plan, using Yarn 4 and feature-sliced boundaries.
 
 Files: Vite app, locale routes, portal shells, Storybook, Playwright, CI.
 

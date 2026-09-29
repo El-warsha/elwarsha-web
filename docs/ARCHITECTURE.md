@@ -1,7 +1,6 @@
 # ElWarsha web architecture
 
-The website is a Vite SPA with a feature-sliced layout adapted from
-`crm-mobile`:
+The website is a Vite SPA with a feature-sliced layout adapted from:
 
 - `app` composes routes and providers
 - `core` owns i18n, theme, logging, forms, and the API client
@@ -18,4 +17,3 @@ client.
 
 Participant portal v1 (screens, status, week content, GitHub listening) is
 specified in [`product/PORTAL.md`](product/PORTAL.md).
-

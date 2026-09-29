@@ -11,13 +11,13 @@ reviews and checks.
 
 ## Locked decisions
 
-| Decision | Choice |
-| -------- | ------ |
-| Audience | Participants only. No mentor/admin chrome. |
-| Sign-in | Auth0 in v1. HttpOnly session cookie from the API. |
-| Home | This week. |
-| Catalog | No Products or Cohorts in the portal. Cohort 01 is assumed. |
-| GitHub | Listen to PRs and reviews on the week’s starting branches. No attach-PR form. |
+| Decision    | Choice                                                                        |
+| ----------- | ----------------------------------------------------------------------------- |
+| Audience    | Participants only. No mentor/admin chrome.                                    |
+| Sign-in     | Auth0 in v1. HttpOnly session cookie from the API.                            |
+| Home        | This week.                                                                    |
+| Catalog     | No Products or Cohorts in the portal. Cohort 01 is assumed.                   |
+| GitHub      | Listen to PRs and reviews on the week’s starting branches. No attach-PR form. |
 | Progression | Current + previous weeks only. Maintainer sets Passed, then week N+1 unlocks. |
 
 Product and cohort rows may still exist in the API (GitHub App installs hang
@@ -25,15 +25,15 @@ off repos). They are not portal features.
 
 ## Surfaces
 
-| Surface | Route | v1 |
-| ------- | ----- | -- |
-| Sign in / This week | `/:locale/portal/` | Build |
-| Visible weeks | `/:locale/portal/weeks/` | Build |
-| Products | `/:locale/portal/products/` | Redirect to This week |
-| Cohorts | `/:locale/portal/cohorts/` | Redirect to This week |
-| Assignments (old shell) | `/:locale/portal/assignments/` | Redirect to Weeks |
-| Submissions | `/:locale/portal/submissions/` | Redirect to This week |
-| Reviews | `/:locale/portal/reviews/` | Redirect to This week |
+| Surface                 | Route                          | v1                    |
+| ----------------------- | ------------------------------ | --------------------- |
+| Sign in / This week     | `/:locale/portal/`             | Build                 |
+| Visible weeks           | `/:locale/portal/weeks/`       | Build                 |
+| Products                | `/:locale/portal/products/`    | Redirect to This week |
+| Cohorts                 | `/:locale/portal/cohorts/`     | Redirect to This week |
+| Assignments (old shell) | `/:locale/portal/assignments/` | Redirect to Weeks     |
+| Submissions             | `/:locale/portal/submissions/` | Redirect to This week |
+| Reviews                 | `/:locale/portal/reviews/`     | Redirect to This week |
 
 Do not leave fixture shells on the redirected routes.
 
@@ -81,12 +81,12 @@ Layout:
 
 One current label, plus three steps. Only the furthest reached step is filled.
 
-| Status | When |
-| ------ | ---- |
-| Not started | No matching PR on the week’s starting branch(es). |
-| PRs created | A listened PR exists for each required repo (web, API, or both). |
+| Status       | When                                                                                                                             |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| Not started  | No matching PR on the week’s starting branch(es).                                                                                |
+| PRs created  | A listened PR exists for each required repo (web, API, or both).                                                                 |
 | PRs reviewed | The participant has submitted at least one GitHub review this week (peer review). `reviewerGithubUserId` matches their identity. |
-| Passed | Maintainer marked the week complete. Unlocks week N+1. |
+| Passed       | Maintainer marked the week complete. Unlocks week N+1.                                                                           |
 
 PRs created / reviewed are listened from GitHub. They do not auto-Passed.
 There is no participant Complete button.
@@ -133,15 +133,15 @@ Unlock:
 
 ## Shared states
 
-| State | UI |
-| ----- | -- |
-| Loading | Preparing the workshop… |
-| Signed out | Sign-in screen |
+| State         | UI                                                                        |
+| ------------- | ------------------------------------------------------------------------- |
+| Loading       | Preparing the workshop…                                                   |
+| Signed out    | Sign-in screen                                                            |
 | No membership | Signed in, but you are not in this cohort yet. Do not fetch week catalog. |
-| No PR yet | On Assignment panel |
-| No review yet | Status stays on PRs created |
-| Passed | Status strip; next week unlocks |
-| Error | Existing workshop error copy |
+| No PR yet     | On Assignment panel                                                       |
+| No review yet | Status stays on PRs created                                               |
+| Passed        | Status strip; next week unlocks                                           |
+| Error         | Existing workshop error copy                                              |
 
 Apply for the next cohort stays `mailto:hello@elwarsha.dev` on the public home.
 

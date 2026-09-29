@@ -72,6 +72,10 @@ export const messages = {
     },
     portal: {
       title: "بوابة المشارك",
+      signInTitle: "سجّل الدخول عشان تشوف أسبوعك",
+      logIn: "تسجيل الدخول",
+      authFailedTitle: "فشل تسجيل الدخول",
+      authFailedBody: "تعذر إكمال تسجيل الدخول. حاول مرة أخرى.",
       unavailable: "تسجيل الدخول والكتابة الحقيقية لسه مش مفتوحين في الأساس.",
       empty: "مفيش عناصر للعرض.",
       loading: "بنجهّز الورشة…",
@@ -82,6 +86,7 @@ export const messages = {
       week: "الأسبوع",
       submissions: "التسليمات",
       reviews: "المراجعات",
+      signOut: "تسجيل الخروج",
     },
     error: "حصل خطأ في الورشة. حدّث الصفحة وحاول تاني.",
     footer: "تعلّم قدام الناس. ابنِ لحاجة حقيقية.",
@@ -149,6 +154,10 @@ export const messages = {
     },
     portal: {
       title: "Participant portal",
+      signInTitle: "Sign in to see this week",
+      logIn: "Log in",
+      authFailedTitle: "Authentication failed",
+      authFailedBody: "Could not complete sign in. Please try again.",
       unavailable:
         "Real sign-in and writes are intentionally incomplete in this foundation.",
       loading: "Preparing the workshop…",
@@ -160,6 +169,7 @@ export const messages = {
       week: "Week",
       submissions: "Submissions",
       reviews: "Reviews",
+      signOut: "Sign out",
     },
     error: "Something broke in the workshop. Reload and try again.",
     footer: "Learn in public. Build for real.",
