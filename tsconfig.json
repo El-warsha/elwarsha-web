@@ -15,14 +15,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@core/*": ["src/core/*"],
-      "@entities/*": ["src/entities/*"],
-      "@features/*": ["src/features/*"],
-      "@ui/*": ["src/ui/*"],
-      "@test/*": ["src/test/*"]
+      "@app/*": ["./src/app/*"],
+      "@core/*": ["./src/core/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@features/*": ["./src/features/*"],
+      "@ui/*": ["./src/ui/*"],
+      "@test/*": ["./src/test/*"]
     },
     "types": ["vite/client", "vitest/globals"]
   },

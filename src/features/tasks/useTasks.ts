@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { api } from "@core/api";
-import type { Assignment } from "@elwarsha/api-client";
+import type { Assignment } from "@entities/assignment";
 
-export function useTasks() {
+export function useTasks(selectedLabelId?: string | null) {
   const [tasks, setTasks] = useState<Assignment[] | null>(null);
 
   useEffect(() => {
@@ -23,5 +23,15 @@ export function useTasks() {
     };
   }, []);
 
-  return { tasks };
+  // تصفية المهام حسب اللابل المحدد
+  const filteredTasks = useMemo(() => {
+    if (!tasks) return null;
+    if (!selectedLabelId) return tasks;
+
+    return tasks.filter((task) =>
+      task.labels?.some((label) => label.id === selectedLabelId)
+    );
+  }, [tasks, selectedLabelId]);
+
+  return { tasks: filteredTasks };
 }
