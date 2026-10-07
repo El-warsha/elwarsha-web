@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  width: min(100%, 20rem);
+}
+
+.label {
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.select {
+  width: 100%;
+  min-height: var(--size-input);
+  padding: 0 var(--spacing-12);
+  border: var(--size-border-thin) solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.select:focus-visible {
+  outline: var(--size-border-thin) solid var(--focus);
+  outline-offset: var(--spacing-4);
+}
