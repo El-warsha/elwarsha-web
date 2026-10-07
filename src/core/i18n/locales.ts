@@ -29,7 +29,7 @@ export const messages = {
     },
     initiative: {
       title: "مبادرة، مش كورس.",
-      body: "الورشة بتحاكي دخول فريق شغّال: كود موجود، تذاكر واضحة، مراجعات، وحدود معمارية لازم تحترمها.",
+      body: " بتحاكي دخول فريق شغّال: كود موجود، تذاكر واضحة، مراجعات، وحدود معمارية لازم تحترمها.",
     },
     roadmap: {
       title: "تمانية أسابيع، مفهوم واحد في كل أسبوع.",
@@ -110,8 +110,8 @@ export const messages = {
       method: "See how the work happens",
     },
     initiative: {
-      title: "An initiative, not a course.",
-      body: "ElWarsha simulates joining a working team: existing code, written tickets, reviews, and architectural boundaries you have to respect.",
+      title: "An initiative,not a course.",
+      body: " simulates joining a production-level programming team: navigating existing codebases, resolving structured tickets, conducting peer code reviews, and respecting strict architectural boundaries.",
     },
     roadmap: {
       title: "Eight weeks. One concept each week.",

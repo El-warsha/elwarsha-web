@@ -17,10 +17,16 @@ body {
   color: var(--ink);
 }
 
+
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
+  color: blue;
+}
+
+p {
+  font-size: 1.15rem;
 }
 
 a {
@@ -31,3 +37,45 @@ ol {
   padding-inline-start: 1.2rem;
   font-size: 1.15rem;
 }
+
+
+/* ==========================================
+   تأثيرات الموشن جرافيك والتحسينات البصرية
+   ========================================== */
+
+/* 1. تعريف انيميشن الظهور التدريجي */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. تطبيق الحركة على العناوين والفقرات تلقائياً */
+h1, h2, h3, p {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. تحسين انسيابية الخطوط والتباعد */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.brand-highlight {
+  /* تحديد الألوان والاتجاه (مثال: من الأزرق للبنفسجي للوردي) */
+  background: linear-gradient(90deg, #2563eb, #9333ea, #ec4899);
+  
+  /* قص الخلفية على شكل النص فقط جعل لون النص شفافاً */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  font-weight: bold;
+  display: inline-block;
+}
+
