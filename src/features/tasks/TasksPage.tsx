@@ -2,33 +2,35 @@ import { messages, type Locale } from "@core/i18n";
 import { PageSection } from "@ui/patterns/PageSection/PageSection";
 
 import { useTasks } from "./hooks/useTasks.js";
-import { LabelChip } from "@ui/components/LabelChip/LabelChip.js";
-import { LabelPicker } from "@ui/components/LabelPicker/LabelPicker.js";
+import { LabelPicker } from "@features/tasks/components/LabelPicker/LabelPicker.js";
 import { useState } from "react";
+import { AssignmentCard } from "./components/AssignmentCard/AssignmentCard.js";
 
 export function TasksPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
   const { tasks } = useTasks();
-  const [selectedLabelId, setSelectedLabelId] = useState<string | null>('all');
+  const [selectedLabelId, setSelectedLabelId] = useState<string | null>("all");
 
-  const task = tasks?.[0];
-  const labels = task?.labels;
+  const labels= tasks?.flatMap(({labels})=>{return labels})    ;
+  const labelPicker = labels ? (
+    <LabelPicker
+      title={copy.portal.labelPickerTitle}
+      labels={labels}
+      value={selectedLabelId}
+      onChange={setSelectedLabelId}
+    ></LabelPicker>
+  ) : null;
   return (
     <PageSection
+    labelPicker={labelPicker}
       eyebrow={copy.portal.assignments}
-      title={task?.title ?? copy.portal.loading}
+      title={ copy.portal.title}
     >
-      {task ? (
-        <p>
-          {copy.portal.week} {task.weekNumber}
-        </p>
-      ) : null}
-      <div> {labels && labels.map((label) => <LabelChip label={label}></LabelChip>)}</div>
-     { labels&&<LabelPicker
-        labels={labels}
-            value={selectedLabelId}
-        onChange={setSelectedLabelId}
-      ></LabelPicker>}
+      {tasks ? (
+        tasks.map((task)=>
+       <AssignmentCard assignment={task} locale={locale}></AssignmentCard>)
+      ) 
+      : null}
     </PageSection>
   );
 }

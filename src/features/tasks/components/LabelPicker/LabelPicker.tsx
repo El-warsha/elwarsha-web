@@ -2,12 +2,15 @@ import type { Label } from "@entities/assignment";
 import styles from "./LabelPicker.module.css";
 
 type LabelPickerProps = {
+     title:string;
   labels: Label[];
   value: string | null;
   onChange: (labelId: string | null) => void;
 };
 
+
 export function LabelPicker({
+    title,
   labels,
   value,
   onChange,
@@ -15,7 +18,7 @@ export function LabelPicker({
   return (
     <div className={styles.wrapper}>
       <label className={styles.label} htmlFor="task-label-filter">
-        Filter by label
+        {title}
       </label>
 
       <select
