@@ -1,7 +1,1 @@
-export type Assignment = {
-  id: string;
-  weekNumber: number;
-  title: string;
-  status: "draft" | "published" | "closed";
-  engagementId: string;
-};
+export type { Assignment, Label } from "@elwarsha/api-client";

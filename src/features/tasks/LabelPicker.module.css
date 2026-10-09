@@ -1,0 +1,28 @@
+.labelPicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-24);
+}
+
+.labelPicker__button {
+  margin: 0;
+
+  padding: var(--spacing-6) var(--spacing-12);
+  border: var(--size-border-thin, 1px) solid var(--color-border-subtle, var(--line));
+  border-radius: var(--radius-full); 
+  background: var(--color-surface-default);
+  color: var(--color-text-secondary, var(--color-text-primary));
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+
+.labelPicker__button:hover {
+  background: var(--color-surface-hover, var(--color-surface-brand));
+  color: var(--color-text-brand);
+  border-color: var(--color-border-hover, var(--color-brand));
+}

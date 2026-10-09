@@ -50,12 +50,18 @@ export type Engagement = {
   product: Product;
 };
 
+export type Label = {
+  id: string;
+  name: string;
+};
+
 export type Assignment = {
   id: string;
   weekNumber: number;
   title: string;
   status: "draft" | "published" | "closed";
   engagementId: string;
+  labels: Label[];
 };
 
 export type ApiError = {
@@ -117,7 +123,13 @@ export function createElWarshaClient(options: ElWarshaClientOptions) {
     logout: () => request<{ ok: boolean }>("/api/v1/auth/logout", { method: "POST" }),
     listProducts: () => request<Product[]>("/api/v1/products"),
     listEngagements: () => request<Engagement[]>("/api/v1/engagements"),
-    listAssignments: () => request<Assignment[]>("/api/v1/assignments"),
+    listAssignments: (params?: { label?: string }) =>
+  request<Assignment[]>(
+    params?.label
+      ? `/api/v1/assignments?label=${encodeURIComponent(params.label)}`
+      : "/api/v1/assignments",
+  ),
+    listLabels: () => request<Label[]>("/api/v1/labels"),
   };
 }
 
