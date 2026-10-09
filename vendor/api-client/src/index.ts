@@ -56,14 +56,28 @@ export type Assignment = {
   title: string;
   status: "draft" | "published" | "closed";
   engagementId: string;
+  labels: Label[];
 };
 
+export type Label = {
+  id: string;
+  name: string;
+}
+export type AssignmentQuery = {
+  cursor?: string;
+  limit?: number;
+  labelId?: string;
+};
 export type ApiError = {
   error: {
     code: string;
     message: string;
     requestId: string | null;
   };
+};
+export type AssignmentsResponse = {
+  items: Assignment[];
+  nextCursor: string | null;
 };
 
 export type ElWarshaClientOptions = {
@@ -117,7 +131,28 @@ export function createElWarshaClient(options: ElWarshaClientOptions) {
     logout: () => request<{ ok: boolean }>("/api/v1/auth/logout", { method: "POST" }),
     listProducts: () => request<Product[]>("/api/v1/products"),
     listEngagements: () => request<Engagement[]>("/api/v1/engagements"),
-    listAssignments: () => request<Assignment[]>("/api/v1/assignments"),
+listAssignments: (params?: AssignmentQuery) => {
+  const query = new URLSearchParams();
+
+  if (params?.cursor) {
+    query.set("cursor", params.cursor);
+  }
+
+  if (params?.limit !== undefined) {
+    query.set("limit", String(params.limit));
+  }
+
+  if (params?.labelId) {
+    query.set("labelId", params.labelId);
+  }
+
+  const queryString = query.toString();
+
+  return request<AssignmentsResponse>(
+    `/api/v1/assignments${queryString ? `?${queryString}` : ""}`,
+  );
+},
+  listLabels: () => request<Label[]>("/api/v1/labels"),
   };
 }
 
