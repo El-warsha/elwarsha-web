@@ -1,0 +1,33 @@
+.chip {
+  display: inline-flex;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.interactive {
+  cursor: pointer;
+  background: var(--color-surface-default);
+  color: var(--color-text-secondary);
+  transition:
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.interactive:hover {
+  background: var(--color-surface-muted);
+}
+
+.interactive:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.selected {
+  background: var(--color-surface-brand);
+  color: var(--color-text-brand);
+  border-color: var(--color-text-brand);
+}

@@ -1,0 +1,7 @@
+.tasksList {
+  display: grid;
+  gap: var(--spacing-24);
+  padding: 0;
+  margin: var(--spacing-16) 0 0;
+  list-style: none;
+}
