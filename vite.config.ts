@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
+        "@elwarsha/api-client": fileURLToPath(
+          new URL("./vendor/api-client/src/index.ts", import.meta.url),
+        ),
         "@app": fileURLToPath(new URL("./src/app", import.meta.url)),
         "@core": fileURLToPath(new URL("./src/core", import.meta.url)),
         "@entities": fileURLToPath(new URL("./src/entities", import.meta.url)),
