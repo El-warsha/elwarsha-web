@@ -1,4 +1,4 @@
-import type { Assignment, Engagement, Product } from "@elwarsha/api-client";
+import type { Assignment, Engagement, Label, Product } from "@elwarsha/api-client";
 
 export const productFixture: Product = {
   id: "product-1",
@@ -21,10 +21,17 @@ export const engagementFixture: Engagement = {
   product: productFixture,
 };
 
+export const labelFixtures: Label[] = [
+  { id: "label-1", name: "frontend" },
+  { id: "label-2", name: "backend" },
+  { id: "label-3", name: "review" },
+];
+
 export const assignmentFixture: Assignment = {
   id: "assignment-1",
   weekNumber: 1,
   title: "Navigate the codebase and open a focused PR",
   status: "published",
   engagementId: "engagement-1",
+  labels: labelFixtures,
 };
