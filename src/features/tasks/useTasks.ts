@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { api } from "@core/api";
-import type { Assignment } from "@elwarsha/api-client";
+import type { Assignment } from "@entities/assignment.js";
 
 export function useTasks() {
   const [tasks, setTasks] = useState<Assignment[] | null>(null);
@@ -9,14 +9,11 @@ export function useTasks() {
   useEffect(() => {
     let cancelled = false;
 
-    api
-      .listAssignments()
-      .then((rows) => {
-        if (!cancelled) setTasks(rows);
-      })
-      .catch(() => {
-        if (!cancelled) setTasks([]);
-      });
+    api.listAssignments().then((rows) => {
+      if (!cancelled) {
+        setTasks(rows);
+      }
+    });
 
     return () => {
       cancelled = true;
