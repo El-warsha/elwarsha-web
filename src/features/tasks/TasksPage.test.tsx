@@ -5,7 +5,6 @@ import { api } from "@core/api";
 import { assignmentFixture } from "@core/catalog/fixtures";
 
 import { TasksPage } from "./TasksPage.js";
-import userEvent from "@testing-library/user-event";
 vi.mock("@core/api", () => ({
   api: {
     listAssignments: vi.fn(),
