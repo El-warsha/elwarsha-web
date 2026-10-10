@@ -1,0 +1,27 @@
+.select {
+  width: 100%;
+  min-height: var(--size-input);
+  padding: 0 var(--spacing-12);
+  border: var(--size-border-thin) solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.select option:checked {
+  background: var(--color-surface-brand);
+  color: var(--color-text-brand);
+}
+
+.select:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+}
+
+.select option:checked {
+  background: var(--color-surface-brand);
+  color: var(--color-text-brand);
+}
