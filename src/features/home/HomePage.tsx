@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { messages, type Locale } from "@core/i18n";
-import { ButtonLink } from "@ui/components/Button/Button";
+import { Button } from "@ui/components/Button/Button";
 
 import styles from "./HomePage.module.css";
 
@@ -14,7 +14,9 @@ export function HomePage({ locale }: { locale: Locale }) {
       <h1>{copy.hero.title}</h1>
       <p className={styles.body}>{copy.hero.body}</p>
       <div className={styles.actions}>
-        <ButtonLink href="mailto:hello@elwarsha.dev">{copy.hero.apply}</ButtonLink>
+        <Link to={`/${locale}/apply/`} style={{ textDecoration: "none" }}>
+          <Button>{copy.hero.apply}</Button>
+        </Link>
         <Link className={styles.textLink} to={`/${locale}/roadmap/`}>
           {copy.hero.method}
         </Link>

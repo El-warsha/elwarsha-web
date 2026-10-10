@@ -1,3 +1,4 @@
+import { applyRoute } from "@features/apply";
 import { assignmentsRoute } from "@features/tasks";
 import { cohortsRoute } from "@features/cohorts";
 import { faqRoute } from "@features/faq";
@@ -16,6 +17,7 @@ export const publicRoutes = [
   roadmapRoute,
   participationRoute,
   faqRoute,
+  applyRoute,
 ];
 
 export const portalRoutes = [
