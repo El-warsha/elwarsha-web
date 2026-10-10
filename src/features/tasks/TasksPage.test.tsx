@@ -5,7 +5,7 @@ import { api } from "@core/api";
 import { assignmentFixture } from "@core/catalog/fixtures";
 
 import { TasksPage } from "./TasksPage.js";
-
+import userEvent from "@testing-library/user-event";
 vi.mock("@core/api", () => ({
   api: {
     listAssignments: vi.fn(),
@@ -26,5 +26,14 @@ describe("TasksPage", () => {
       await screen.findByRole("heading", { name: assignmentFixture.title }),
     ).toBeInTheDocument();
     expect(screen.getByText("Week 1")).toBeInTheDocument();
+    const labels = screen.getByLabelText("Assignment labels");
+
+    expect(labels).toHaveTextContent("Frontend");
+    expect(labels).toHaveTextContent("Git");
+    expect(await
+      screen.findByRole("combobox", {
+        name: "Filter by Task Label",
+      }),
+    ).toBeInTheDocument();
   });
 });

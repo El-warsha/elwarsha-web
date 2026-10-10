@@ -9,10 +9,24 @@ import { AssignmentCard } from "./components/AssignmentCard/AssignmentCard.js";
 export function TasksPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
   const { tasks } = useTasks();
-  const [selectedLabelId, setSelectedLabelId] = useState<string | null>("all");
+  const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
 
-  const labels= tasks?.flatMap(({labels})=>{return labels})    ;
-  const labelPicker = labels ? (
+  const labels = [
+    ...new Map(
+      (tasks ?? []).flatMap((task) => task.labels).map((label) => [label.id, label]),
+    ).values(),
+  ];
+  const filteredTasks = (tasks ?? []).filter((task) => {
+  if (selectedLabelId === null) {
+    return true;
+  }
+
+  return task.labels.some(
+    (label) => label.id === selectedLabelId,
+  );
+});
+
+  const labelPicker = labels.length > 0 ? (
     <LabelPicker
       title={copy.portal.labelPickerTitle}
       labels={labels}
@@ -22,15 +36,15 @@ export function TasksPage({ locale }: { locale: Locale }) {
   ) : null;
   return (
     <PageSection
-    labelPicker={labelPicker}
+      labelPicker={labelPicker}
       eyebrow={copy.portal.assignments}
-      title={ copy.portal.title}
+      title={copy.portal.title}
     >
-      {tasks ? (
-        tasks.map((task)=>
-       <AssignmentCard assignment={task} locale={locale}></AssignmentCard>)
-      ) 
-      : null}
+      {
+         filteredTasks.map((task) => (
+            <AssignmentCard key={task.id} assignment={task} locale={locale}></AssignmentCard>
+          ))
+        }
     </PageSection>
   );
 }
