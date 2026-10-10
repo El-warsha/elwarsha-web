@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { api } from "@core/api";
-import type { Assignment } from "@elwarsha/api-client";
+import { mapAssignmentDtoEntity, type Assignment } from "@entities/assignment";
 
 export function useTasks() {
   const [tasks, setTasks] = useState<Assignment[] | null>(null);
@@ -12,8 +12,10 @@ export function useTasks() {
     api
       .listAssignments()
       .then((rows) => {
-        if (!cancelled) setTasks(rows);
-      })
+          const mappedTasks = rows.map(mapAssignmentDtoEntity);
+          setTasks(mappedTasks);
+        }
+      )
       .catch(() => {
         if (!cancelled) setTasks([]);
       });
