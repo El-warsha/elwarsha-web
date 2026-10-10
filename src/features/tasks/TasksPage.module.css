@@ -1,0 +1,41 @@
+.tasksList {
+  display: grid;
+  gap: var(--spacing-24);
+  padding: 0;
+  margin: var(--spacing-16) 0 0;
+  list-style: none;
+}
+
+.taskItem {
+  display: grid;
+  gap: var(--spacing-8);
+  padding: var(--spacing-16);
+  border: var(--size-border-thin) solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-default);
+}
+
+.taskTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.taskMeta {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+}
+
+.labelsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

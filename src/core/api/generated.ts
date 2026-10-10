@@ -1,6 +1,7 @@
 export {
   createElWarshaClient,
   ElWarshaApiError,
+  type Label,
   type Assignment,
   type Capability,
   type ElWarshaClient,
