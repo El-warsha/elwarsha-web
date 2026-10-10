@@ -284,8 +284,8 @@ __metadata:
 
 "@elwarsha/api-client@file:vendor/api-client::locator=elwarsha-web%40workspace%3A.":
   version: 0.1.0
-  resolution: "@elwarsha/api-client@file:vendor/api-client#vendor/api-client::hash=054d91&locator=elwarsha-web%40workspace%3A."
-  checksum: 10c0/939a80ad745eaad31eb3c64130be93168366c89486f5d6cb3b06bab48a83d154d62a63a103f28bce840c3e55c26700d12754eb06f1b8f970a2d8433873c2e129
+  resolution: "@elwarsha/api-client@file:vendor/api-client#vendor/api-client::hash=4aaec6&locator=elwarsha-web%40workspace%3A."
+  checksum: 10c0/ba716acbfe6b063ccdf56c49fc60def0c13f2c519d4a67f5bbda213ed8c38f38e72e228d45e852e5a39faabd34a6143194c053bedf875d55ae42a4a8d5005992
   languageName: node
   linkType: hard
 
