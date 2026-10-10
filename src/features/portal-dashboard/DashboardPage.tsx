@@ -8,6 +8,7 @@ import { PageSection } from "@ui/patterns/PageSection/PageSection";
 import { StatePanel } from "@ui/patterns/StatePanel/StatePanel";
 
 import styles from "./DashboardPage.module.css";
+import { TasksPage } from "@features/tasks/TasksPage";
 
 export function DashboardPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
@@ -61,6 +62,7 @@ export function DashboardPage({ locale }: { locale: Locale }) {
       <div className={styles.actions}>
         <ButtonLink href={api.loginUrl({ locale })}>{copy.portal.logIn}</ButtonLink>
       </div>
+      <TasksPage locale={locale}/>
     </PageSection>
   );
 }
