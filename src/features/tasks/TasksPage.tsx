@@ -33,7 +33,7 @@ export function TasksPage({ locale }: { locale: Locale }) {
             >
               <div >  
                 <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: 'var(--spacing-16)' }}>
-                  {task.labels.map((label) => (
+                  {task.labels?.map((label) => (
                     <LabelChip key={label.id} label={label} />
                   ))}
                 </div>

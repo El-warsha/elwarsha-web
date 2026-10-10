@@ -27,4 +27,8 @@ export const assignmentFixture: Assignment = {
   title: "Navigate the codebase and open a focused PR",
   status: "published",
   engagementId: "engagement-1",
+  labels: [
+    { id: "label-1", name: "Frontend" },
+    { id: "label-2", name: "Backend" },
+  ],
 };
