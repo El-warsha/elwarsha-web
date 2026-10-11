@@ -21,3 +21,8 @@ export const api = {
 };
 
 export { ElWarshaApiError } from "@elwarsha/api-client";
+export type {
+  ApplyCohortInput,
+  CohortApplicationResponse,
+  ApiError,
+} from "@elwarsha/api-client";
