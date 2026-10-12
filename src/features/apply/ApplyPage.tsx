@@ -1,5 +1,5 @@
 import { messages, type Locale } from "@core/i18n";
-import { CohortApplicationForm } from "./CohortApplicationForm.js";
+import { CohortApplicationForm } from "./components/CohortApplicationForm/CohortApplicationForm.js";
 
 import styles from "./ApplyPage.module.css";
 
