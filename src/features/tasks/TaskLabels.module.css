@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: inline-flex;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: var(--spacing-4) var(--spacing-8);
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  border: var(--size-border-thin) solid var(--color-border-default);
+  border-radius: var(--radius-full);
+}

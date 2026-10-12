@@ -1,0 +1,21 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-16);
+  padding: var(--spacing-16);
+  background: var(--color-surface-default);
+  border: var(--size-border-thin) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.week {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}

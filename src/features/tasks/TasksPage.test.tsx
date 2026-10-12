@@ -26,5 +26,24 @@ describe("TasksPage", () => {
       await screen.findByRole("heading", { name: assignmentFixture.title }),
     ).toBeInTheDocument();
     expect(screen.getByText("Week 1")).toBeInTheDocument();
+    expect(screen.getByText(assignmentFixture.status)).toBeInTheDocument();
+    expect(screen.getByText("Architecture")).toBeInTheDocument();
+    expect(screen.getByText("Modularity")).toBeInTheDocument();
+  });
+
+  it("renders custom labels when provided on the assignment", async () => {
+    const customAssignment = {
+      ...assignmentFixture,
+      labels: ["Frontend", "Design System"],
+    };
+    vi.mocked(api.listAssignments).mockResolvedValue([customAssignment]);
+
+    render(<TasksPage locale="en" />);
+
+    expect(
+      await screen.findByRole("heading", { name: customAssignment.title }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Frontend")).toBeInTheDocument();
+    expect(screen.getByText("Design System")).toBeInTheDocument();
   });
 });

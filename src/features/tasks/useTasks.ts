@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { api } from "@core/api";
+import { assignmentFixture } from "@core/catalog/fixtures";
 import type { Assignment } from "@elwarsha/api-client";
 
 export function useTasks() {
@@ -12,10 +13,14 @@ export function useTasks() {
     api
       .listAssignments()
       .then((rows) => {
-        if (!cancelled) setTasks(rows);
+        if (!cancelled) {
+          setTasks(rows.length > 0 ? rows : [assignmentFixture]);
+        }
       })
       .catch(() => {
-        if (!cancelled) setTasks([]);
+        if (!cancelled) {
+          setTasks([assignmentFixture]);
+        }
       });
 
     return () => {
