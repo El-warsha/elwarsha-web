@@ -1,13 +1,9 @@
 
 import type { InputHTMLAttributes } from "react";
 import styles from "./TextInputField.module.css";
+import type { FormFieldProps } from "src/types/types";
 
-type TextInputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
-  label: string;
-  error?: string;
-  containerClassName?: string;
-  inputClassName?: string;
-};
+type TextInputFieldProps = InputHTMLAttributes<HTMLInputElement> & FormFieldProps
 
 export function TextInputField({
   label,

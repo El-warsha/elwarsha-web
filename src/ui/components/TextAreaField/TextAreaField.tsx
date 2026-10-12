@@ -1,14 +1,9 @@
 
 import type { TextareaHTMLAttributes } from "react";
 import styles from "./TextAreaField.module.css";
-
+import type { FormFieldProps } from "src/types/types";
 export type TextAreaFieldProps =
-  TextareaHTMLAttributes<HTMLTextAreaElement> & {
-    label: string;
-    error?: string;
-    containerClassName?: string;
-    inputClassName?: string;
-  };
+  TextareaHTMLAttributes<HTMLTextAreaElement> & FormFieldProps
 
 export function TextAreaField({
   label,
