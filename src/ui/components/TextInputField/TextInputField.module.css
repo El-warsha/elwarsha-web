@@ -4,11 +4,13 @@
   flex-direction: column;
   gap: 6px;
   width: 100%;
+  align-items: flex-start;
+
 }
 
 .label {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 800;
   color: var(--color-text, #25231e);
 }
 
@@ -20,8 +22,8 @@
   width: 100%;
   min-height: 44px;
   padding: 10px 12px;
-  border: 1px solid #d6d0c4;
-  border-radius: 8px;
+  border: 2px solid var(--color-border-default);
+  border-radius: 2px;
   background-color: #fffdf6;
   color: #25231e;
   font: inherit;
@@ -40,7 +42,7 @@
 }
 
 .input:focus-visible {
-  border-color: #c9431f;
+  /* border-color: #c9431f; */
   box-shadow: 0 0 0 3px rgb(201 67 31 / 15%);
 }
 

@@ -1,6 +1,7 @@
 import { messages, type Locale } from "@core/i18n";
 import styles from "./CohortApplicationForm.module.css";
 import { TextInputField } from "@ui/components/TextInputField/TextInputField";
+import { TextAreaField } from "@ui/components/TextAreaField/TextAreaField";
 
 export interface CohortApplicationFormProps {
   locale: Locale;
@@ -24,6 +25,7 @@ export function CohortApplicationForm({
             : "Application form under construction (Week 2 Task)"}
         </p>
         <TextInputField label="full name "></TextInputField>
+     <TextAreaField label="your experinece"></TextAreaField>
       </div>
       <button type="submit" className={styles.submitButton}>
         {copy.submit}
