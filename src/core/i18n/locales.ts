@@ -84,7 +84,7 @@ export const messages = {
       products: "المنتجات",
       cohorts: "الدفعات",
       assignments: "التكليفات",
-  labelPickerTitle: "تصفية حسب تصنيف المهمة",
+      labelPickerTitle: "تصفية حسب تصنيف المهمة",
       week: "الأسبوع",
       submissions: "التسليمات",
       reviews: "المراجعات",
@@ -101,6 +101,41 @@ export const messages = {
       notePrefix: "تنبيه هام: ",
       note: "الورشة تتطلب تخصيص وقت كافي أسبوعياً للمشاركة والمراجعات. نرجو ملء كافة الحقول بدقة، والحرص على كتابة دافعك بوضوح ورابط الصفحة الشخصية ومستودع GitHub.",
       submit: "إرسال طلب التقديم",
+      applicationForm: {
+
+validation: {
+  nameRequired: "الاسم بالكامل مطلوب",
+  nameMin: "الاسم لازم يكون 3 حروف على الأقل",
+  nameLetters: "اكتب الاسم باستخدام الحروف والمسافات فقط",
+
+  emailRequired: "البريد الإلكتروني مطلوب",
+  emailInvalid: "أدخل بريدًا إلكترونيًا صحيحًا",
+
+  whatsappRequired: "رقم الواتساب مطلوب",
+  whatsappInvalid:  "أدخل رقم واتساب صحيحًا من 10 إلى 15 رقمًا، مع إمكانية إضافة مفتاح الدولة  ",
+
+  githubRequired: " مطلوب GitHub ",
+  githubInvalid: "اسم المستخدم يجب أن يحتوي على الحروف الإنجليزية والأرقام والشرطة (-) فقط",
+
+  discordRequired: "   مطلوب Discord",
+  discordInvalid: "اسم المستخدم يجب أن يتراوح بين حرفين و32 حرفًا، ويحتوي على الحروف الإنجليزية الصغيرة والأرقام والنقطة (.) والشرطة السفلية (_) فقط، دون نقاط متتالية",
+
+  statusRequired: "الحقل مطلوب ",
+  collegeMajorRequired: "الكلية والتخصص مطلوبان",
+  programmingExperienceRequired: "  الحقل مطلوب",
+  technologiesRequired: "اكتب اللغات والتقنيات التي استخدمتِها فعليًا في كتابة الكود",
+
+  personalPageUrlRequired: "رابط الصفحة الشخصية المنشورة مطلوب",
+  personalPageUrlInvalid: "أدخل رابطًا صحيحًا يبدأ بـ http:// أو https://",
+
+  githubRepoUrlRequired: "  GitHubRepo مطلوب",
+  githubRepoUrlInvalid: " https://github.com/username/repository ادخل رابط صحيح مثل",
+
+  aiUsageRequired: "وضح كيف استخدمتِ أدوات الذكاء الاصطناعي، أو اكتب أنكِ لم تستخدميها",
+
+  motivationMin: "اكتب 50 حرفًا على الأقل لتوضيح سبب رغبتك في الانضمام إلى البرنامج",
+}
+      },
     },
     error: "حصل خطأ في الورشة. حدّث الصفحة وحاول تاني.",
     footer: "تعلّم قدام الناس. ابنِ لحاجة حقيقية.",
@@ -182,7 +217,7 @@ export const messages = {
       cohorts: "Cohorts",
       assignments: "Assignments",
       week: "Week",
-      labelPickerTitle:'Filter by Task Label',
+      labelPickerTitle: "Filter by Task Label",
       submissions: "Submissions",
       reviews: "Reviews",
       signOut: "Sign out",
@@ -198,6 +233,44 @@ export const messages = {
       notePrefix: "Important Note: ",
       note: "The workshop requires a serious weekly time commitment for coding and peer reviews. Please fill all fields accurately, including your published personal page and repository links.",
       submit: "Submit Application",
+      applicationForm: {
+  
+
+  "validation": {
+    nameRequired: "Full name is required",
+    nameMin: "Name must be at least 3 letters long",
+    nameLetters: "Please use letters and spaces only",
+
+    emailRequired: "Email address is required",
+    emailInvalid: "Please enter a valid email address",
+
+    whatsappRequired: "WhatsApp number is required",
+    whatsappInvalid: "Please enter a valid WhatsApp number with 10 to 15 digits, optionally starting with a country code (+)",
+
+    githubRequired: "GitHub username is required",
+    githubInvalid: "Username must contain only English letters, numbers, and hyphens (-)",
+
+    discordRequired: "Discord username is required",
+    discordInvalid: "Username must be 2 to 32 characters long and contain only lowercase English letters, numbers, periods (.), and underscores (_), without consecutive periods",
+
+    statusRequired: "Please select your current status",
+    collegeMajorRequired: "College and major are required",
+    programmingExperienceRequired: "Please enter your programming learning experience",
+    technologiesRequired: "Please enter the programming languages and technologies you have actually coded with",
+
+    personalPageUrlRequired: "Published personal page URL is required",
+    personalPageUrlInvalid: "Please enter a valid URL starting with http:// or https://",
+
+    githubRepoUrlRequired: "GitHub repository URL is required",
+    githubRepoUrlInvalid: "Please enter a valid GitHub repository URL, such as https://github.com/username/repository",
+
+    aiUsageRequired: "Please describe how you used AI tools, or state that you did not use any",
+
+    motivationMin: "Please enter at least 50 characters explaining why you want to join the program"
+  
+},
+
+      },
     },
     error: "Something broke in the workshop. Reload and try again.",
     footer: "Learn in public. Build for real.",
