@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 import { api } from '@core/api';
+import { messages, type Locale } from "@core/i18n";
+import styles from "./CohortApplicationForm.module.css";
 
-export function CohortApplicationForm({ cohortSlug = 'cohort-2' }: { cohortSlug?: string }) {
+export interface CohortApplicationFormProps {
+  locale: Locale;
+  cohortSlug?: string;
+}
+
+export function CohortApplicationForm({
+  locale,
+  cohortSlug: _cohortSlug = "cohort-2",
+}: CohortApplicationFormProps) {
+  const isAr = locale === "ar";
+  const copy = messages[locale].apply;
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -29,6 +42,7 @@ export function CohortApplicationForm({ cohortSlug = 'cohort-2' }: { cohortSlug?
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
     // مسح أخطاء الحقل عند الكتابة
     if (fieldErrors[name]) {
       setFieldErrors((prev) => ({ ...prev, [name]: '' }));
@@ -42,7 +56,7 @@ export function CohortApplicationForm({ cohortSlug = 'cohort-2' }: { cohortSlug?
     setConflictError(null);
 
     try {
-      await (api as any).applyCohort(cohortSlug, formData);
+      await (api as any).applyCohort(_cohortSlug, formData);
       setIsSuccess(true);
     } catch (err: any) {
       if (err.status === 422 && err.invalidParams) {
@@ -62,7 +76,7 @@ export function CohortApplicationForm({ cohortSlug = 'cohort-2' }: { cohortSlug?
   if (isSuccess) {
     return (
       <div className="p-6 border rounded-lg bg-green-50">
-        <h2 className="text-xl font-bold">Application Submitted!</h2>
+        <h2 className="text-xl font-bold">Application Submitted</h2>
         <p>Thank you for applying to ElWarsha Cohort 2.</p>
       </div>
     );
@@ -79,7 +93,7 @@ export function CohortApplicationForm({ cohortSlug = 'cohort-2' }: { cohortSlug?
       {/* Section 1 */}
       <fieldset className="border p-4 rounded">
         <legend className="font-bold">1. Personal & Contact Information</legend>
-
+        
         <div className="mt-2">
           <label htmlFor="fullName">Full Name</label>
           <input
@@ -117,11 +131,9 @@ export function CohortApplicationForm({ cohortSlug = 'cohort-2' }: { cohortSlug?
             </span>
           )}
         </div>
-
-        {/* يمكنك تكرار الحقول بنفس النمط لـ whatsappNumber, githubHandle, discordHandle */}
       </fieldset>
 
-      {/* Section 4: Motivation + عداد الحروف */}
+      {/* Section 4: Motivation */}
       <fieldset className="border p-4 rounded">
         <legend className="font-bold">4. Motivation</legend>
         <div>
