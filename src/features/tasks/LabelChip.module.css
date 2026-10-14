@@ -1,0 +1,15 @@
+
+.frontend {
+  color: var(--color-text-success);
+  font-weight: 600;
+}
+
+.backend {
+  color: var(--color-text-brand);
+  font-weight: 600;
+}
+
+.label {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}

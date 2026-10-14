@@ -1,0 +1,9 @@
+.picker {
+    display: flex;
+    gap: 16px;
+}
+
+.selectedTrack {
+    background-color: var(--color-text-brand);
+    color: white;
+}
