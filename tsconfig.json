@@ -22,7 +22,8 @@
       "@entities/*": ["src/entities/*"],
       "@features/*": ["src/features/*"],
       "@ui/*": ["src/ui/*"],
-      "@test/*": ["src/test/*"]
+      "@test/*": ["src/test/*"],
+      "@elwarsha/api-client": ["vendor/api-client/src/index.ts"]
     },
     "types": ["vite/client", "vitest/globals"]
   },

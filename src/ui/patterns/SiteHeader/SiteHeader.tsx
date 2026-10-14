@@ -32,9 +32,14 @@ export function SiteHeader({
         <NavLink to={`${prefix}/faq/`}>{copy.nav.faq}</NavLink>
         <NavLink to={`${prefix}/portal/`}>{copy.nav.portal}</NavLink>
       </nav>
-      <button className={styles.lang} type="button" onClick={onToggleLocale}>
-        <Badge>{copy.language}</Badge>
-      </button>
+      <div className={styles.actions}>
+        <button className={styles.lang} type="button" onClick={onToggleLocale}>
+          <Badge>{copy.language}</Badge>
+        </button>
+        <NavLink className={styles.applyBtn} to={`${prefix}/apply/`}>
+          {copy.nav.apply}
+        </NavLink>
+      </div>
     </header>
   );
 }
