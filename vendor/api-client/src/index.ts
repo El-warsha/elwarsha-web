@@ -79,11 +79,11 @@ export type ApplyCohortInput = {
   githubHandle: string;
   discordHandle: string;
   currentStatus:
-    "student" | "recent_graduate" | "employed_tech" | "career_switcher" | "other";
+    "student"| "graduate"| "working in tech"| "switching career"| "other";
   collegeMajor: string;
   programmingExperience: string;
   technologies: string;
-  gitExperience: "none" | "basics" | "comfortable";
+  gitExperience: "never" | "basics only" | "comfortable";
   personalPageUrl: string;
   githubRepoUrl: string;
   aiUsage: string;

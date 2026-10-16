@@ -100,6 +100,74 @@ export const messages = {
       notePrefix: "تنبيه هام: ",
       note: "الورشة تتطلب تخصيص وقت كافي أسبوعياً للمشاركة والمراجعات. نرجو ملء كافة الحقول بدقة، والحرص على كتابة دافعك بوضوح ورابط الصفحة الشخصية ومستودع GitHub.",
       submit: "إرسال طلب التقديم",
+
+
+      form: {
+        sections: {
+          personalInformation: "المعلومات الشخصية",
+          technicalBackground: "الخلفية التقنية",
+          personalPages: "الصفحات الشخصية",
+          motivation: "الدافع للتقديم",
+        },
+
+        fields: {
+          fullName: "الاسم بالكامل",
+          emailAddress: "البريد الإلكتروني",
+          whatsappNumber: "رقم الواتساب",
+          githubHandle: "اسم المستخدم على GitHub",
+          discordHandle: "اسم المستخدم على Discord",
+
+          currentStatus: "حالتك الحالية",
+          collegeMajor: "التخصص الجامعي",
+          programmingExperience: "الخبرة في البرمجة",
+          technologies: "التقنيات",
+          gitExperience: "الخبرة في Git",
+
+          personalPageUrl: "رابط الصفحة الشخصية",
+          githubRepoUrl: "رابط مستودع GitHub",
+          aiUsage: "استخدام الذكاء الاصطناعي",
+
+          motivation: "الدافع للتقديم",
+        },
+
+        placeholders: {
+          fullName: "مثال: إيمان أيمن",
+          emailAddress: "developer@example.com",
+          whatsappNumber: "+201012345678",
+          githubHandle: "username",
+          discordHandle: "username",
+
+          currentStatus: "اختاري حالتك الحالية",
+          collegeMajor: "مثال: هندسة الحاسبات",
+          programmingExperience: "مثال: سنة و6 أشهر",
+          technologies: "مثال: React, TypeScript, Node.js...",
+          gitExperience: "اختاري مستوى خبرتك في Git",
+
+          personalPageUrl: "https://yourportfolio.com",
+          githubRepoUrl: "https://github.com/username/repository",
+          aiUsage: "احكي لنا عن استخدامك لأدوات الذكاء الاصطناعي",
+          motivation: "احكي لنا عن دوافعك للانضمام، في 50 حرفًا على الأقل...",
+        },
+
+        options: {
+          currentStatus: {
+            student: "طالب / طالبة",
+            graduate: "خريج / خريجة",
+            workingInTech: "أعمل في مجال التكنولوجيا",
+            switchingCareer: "أغيّر مساري المهني",
+            other: "أخرى",
+          },
+
+          gitExperience: {
+            never: "لم أستخدم Git من قبل",
+            basicsOnly: "الأساسيات فقط",
+            comfortable: "أستخدم Git براحة",
+          },
+        },
+      },
+
+
+
     },
     error: "حصل خطأ في الورشة. حدّث الصفحة وحاول تاني.",
     footer: "تعلّم قدام الناس. ابنِ لحاجة حقيقية.",
@@ -196,6 +264,73 @@ export const messages = {
       notePrefix: "Important Note: ",
       note: "The workshop requires a serious weekly time commitment for coding and peer reviews. Please fill all fields accurately, including your published personal page and repository links.",
       submit: "Submit Application",
+
+
+      form: {
+        sections: {
+          personalInformation: "Personal Information",
+          technicalBackground: "Technical Background",
+          personalPages: "Personal Pages",
+          motivation: "Motivation",
+        },
+
+        fields: {
+          fullName: "Full Name",
+          emailAddress: "Email Address",
+          whatsappNumber: "WhatsApp Number",
+          githubHandle: "GitHub Handle",
+          discordHandle: "Discord Handle",
+
+          currentStatus: "Current Status",
+          collegeMajor: "College Major",
+          programmingExperience: "Programming Experience",
+          technologies: "Technologies",
+          gitExperience: "Git Experience",
+
+          personalPageUrl: "Personal Page URL",
+          githubRepoUrl: "GitHub Repository URL",
+          aiUsage: "AI Usage",
+
+          motivation: "Motivation",
+        },
+
+        placeholders: {
+          fullName: "e.g. Eman Ayman",
+          emailAddress: "developer@example.com",
+          whatsappNumber: "+201012345678",
+          githubHandle: "username",
+          discordHandle: "username",
+
+          currentStatus: "Select your current status",
+          collegeMajor: "e.g. Computer Engineering",
+          programmingExperience: "e.g. 1 year, 6 months",
+          technologies: "List the technologies you've worked with (e.g. React, TypeScript, Node.js)",
+          gitExperience: "Select your Git experience",
+
+          personalPageUrl: "https://yourportfolio.com",
+          githubRepoUrl: "https://github.com/username/repository",
+          aiUsage: "How have you used AI tools?",
+          motivation: "Tell us why you want to join (at least 50 characters)...",
+        },
+
+        options: {
+          currentStatus: {
+            student: "student",
+            graduate: "graduate",
+            workingInTech: "working in Tech",
+            switchingCareer: "switching Career",
+            other: "other",
+          },
+
+          gitExperience: {
+            never: "never",
+            basicsOnly: "basics only",
+            comfortable: "comfortable",
+          },
+        },
+      },
+
+
     },
     error: "Something broke in the workshop. Reload and try again.",
     footer: "Learn in public. Build for real.",
