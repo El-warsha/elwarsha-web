@@ -14,7 +14,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       <h1>{copy.hero.title}</h1>
       <p className={styles.body}>{copy.hero.body}</p>
       <div className={styles.actions}>
-        <ButtonLink href="mailto:hello@elwarsha.dev">{copy.hero.apply}</ButtonLink>
+        <ButtonLink href={`/${locale}/apply/`}>{copy.hero.apply}</ButtonLink>
         <Link className={styles.textLink} to={`/${locale}/roadmap/`}>
           {copy.hero.method}
         </Link>

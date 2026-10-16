@@ -9,6 +9,7 @@ import { productsRoute } from "@features/products";
 import { reviewsRoute } from "@features/reviews";
 import { roadmapRoute } from "@features/roadmap";
 import { submissionsRoute } from "@features/submissions";
+import { applyRoute } from "@features/apply";
 
 export const publicRoutes = [
   homeRoute,
@@ -16,6 +17,7 @@ export const publicRoutes = [
   roadmapRoute,
   participationRoute,
   faqRoute,
+  applyRoute,
 ];
 
 export const portalRoutes = [
@@ -25,4 +27,5 @@ export const portalRoutes = [
   assignmentsRoute,
   submissionsRoute,
   reviewsRoute,
+  
 ];
