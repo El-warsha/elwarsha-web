@@ -89,6 +89,22 @@ const pages = [
     title: "FAQ — ElWarsha",
     description: "Answers to common questions about ElWarsha.",
   },
+  {
+    route: "/ar/apply/",
+    path: "ar/apply/index.html",
+    lang: "ar",
+    dir: "rtl",
+    title: "التقديم — الورشة",
+    description: "استمارة التقديم للدفعة القادمة من مبادرة الورشة.",
+  },
+  {
+    route: "/en/apply/",
+    path: "en/apply/index.html",
+    lang: "en",
+    dir: "ltr",
+    title: "Apply — ElWarsha",
+    description: "Application form for the upcoming cohort of ElWarsha.",
+  },
 ];
 
 for (const page of pages) {
