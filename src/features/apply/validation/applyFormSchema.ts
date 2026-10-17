@@ -90,6 +90,12 @@ collegeMajor: z
       error: validation.personalPageUrlInvalid,
     },
   ),
+  gitExperience: z.enum(
+  ["never", "basics_only", "comfortable"],
+  {
+    error: validation.gitExperienceRequired,
+  },
+),
   githubRepoUrl: z
   .string()
   .trim()
@@ -119,9 +125,6 @@ collegeMajor: z
   .min(50, {
     error: validation.motivationMin,
   }),
-
-
   });
-
-
 };
+export type ApplicationFormValues=z.infer<ReturnType <typeof applyFormSchema>>

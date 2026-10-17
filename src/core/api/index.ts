@@ -1,5 +1,8 @@
 import { createElWarshaClient } from "@elwarsha/api-client";
 import { mapAssignment } from "@entities/assignment.mapper";
+import { mapCohortApply } from "@entities/cohortApply.mapper";
+import{ApplyCohortInput} from '../../entities/CohortApplication'
+
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 if (!baseUrl && import.meta.env.PROD) {
@@ -18,6 +21,13 @@ export const api = {
 
     return assignments.map(mapAssignment);
   },
+
+  async applyCohort(slug:string,data:ApplyCohortInput){
+    const mappedData=mapCohortApply(data);
+    return await client.applyCohort(slug,mappedData);
+
+
+  }
 };
 
 export { ElWarshaApiError } from "@elwarsha/api-client";

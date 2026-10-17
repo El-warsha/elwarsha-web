@@ -2,14 +2,17 @@
 import type { TextareaHTMLAttributes } from "react";
 import styles from "./TextAreaField.module.css";
 import type { FormFieldProps } from "src/types/types";
-export type TextAreaFieldProps =
-  TextareaHTMLAttributes<HTMLTextAreaElement> & FormFieldProps
+export type TextAreaFieldProps =Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,"onChange"|'value'>
+   & FormFieldProps
 
 export function TextAreaField({
   label,
   error,
   id,
   name,
+  value,
+  onChange,
   required,
   containerClassName,
   inputClassName,
@@ -32,6 +35,8 @@ export function TextAreaField({
         {...textareaProps}
         id={textareaId}
         name={name}
+        value={value}
+        onChange={(e)=>onChange(e.target.value)}
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${textareaId}-error` : undefined}
@@ -48,7 +53,6 @@ export function TextAreaField({
         <p
           id={`${textareaId}-error`}
           className={styles.error}
-          role="alert"
         >
           {error}
         </p>

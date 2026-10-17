@@ -3,4 +3,6 @@ export type FormFieldProps = {
   error?: string;
   containerClassName?: string;
   inputClassName?: string;
+  value:string,
+  onChange:(value:string)=>void
 };

@@ -3,13 +3,18 @@ import type { InputHTMLAttributes } from "react";
 import styles from "./TextInputField.module.css";
 import type { FormFieldProps } from "src/types/types";
 
-type TextInputFieldProps = InputHTMLAttributes<HTMLInputElement> & FormFieldProps
+type TextInputFieldProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "value"
+> &FormFieldProps
 
 export function TextInputField({
   label,
   error,
   id,
   name,
+  value,
+  onChange,
   required,
   containerClassName,
   inputClassName,
@@ -32,6 +37,8 @@ export function TextInputField({
         {...inputProps}
         id={inputId}
         name={name}
+        value={value}
+        onChange={(e)=>onChange(e.target.value)}
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${inputId}-error` : undefined}
@@ -48,7 +55,6 @@ export function TextInputField({
         <p
           id={`${inputId}-error`}
           className={styles.error}
-          role="alert"
         >
           {error}
         </p>
