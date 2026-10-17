@@ -1,5 +1,4 @@
 import { createElWarshaClient } from "@elwarsha/api-client";
-
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 if (!baseUrl && import.meta.env.PROD) {
   throw new Error("VITE_API_BASE_URL is required in production");
