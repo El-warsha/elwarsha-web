@@ -12,5 +12,7 @@ export { ElWarshaApiError } from "@elwarsha/api-client";
 export type {
   ApplyCohortInput,
   CohortApplicationResponse,
+  CurrentStatus,
+  GitExperience,
   ApiError,
 } from "@elwarsha/api-client";
