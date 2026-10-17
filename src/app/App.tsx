@@ -6,12 +6,14 @@ import { PublicLayout } from "./PublicLayout.js";
 import { RootRedirect } from "./RootRedirect.js";
 import { RoutedPage } from "./RoutedPage.js";
 import { portalRoutes, publicRoutes } from "./routes/registry.js";
+import { Toaster } from "@ui/components/Toast/index.js";
 
 export function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
         <AppRoutes />
+        <Toaster />
       </BrowserRouter>
     </ErrorBoundary>
   );

@@ -3,9 +3,9 @@
 The website is a Vite SPA with a feature-sliced layout adapted from:
 
 - `app` composes routes and providers
-- `core` owns i18n, theme, logging, forms, and the API client
+- `core` owns i18n, theme, logging, forms, toast notifications (ADR 0007), and the API client
 - `features` own pages and expose route descriptors
-- `ui` owns primitives, components, and patterns. Look is CSS Modules plus
+- `ui` owns primitives, components, patterns, and the global Toaster. Look is CSS Modules plus
   tokens. Tabs, accordion, and similar behavior come from Radix (ADR 0006).
 - `entities` own provider-neutral models
 

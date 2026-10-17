@@ -5,11 +5,15 @@ import { isLocale, type Locale } from "./locales.js";
 const STORAGE_KEY = "elwarsha.locale";
 
 function readStoredLocale(): Locale | null {
-  if (typeof window === "undefined") {
+  if (typeof window === "undefined" || !window.localStorage) {
     return null;
   }
-  const stored = window.localStorage.getItem(STORAGE_KEY) ?? undefined;
-  return isLocale(stored) ? stored : null;
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY) ?? undefined;
+    return isLocale(stored) ? stored : null;
+  } catch {
+    return null;
+  }
 }
 
 function browserLocale(): Locale {
@@ -25,7 +29,11 @@ export const useLocaleStore = create<{
 }>((set) => ({
   locale: readStoredLocale() ?? browserLocale(),
   setLocale: (locale) => {
-    window.localStorage.setItem(STORAGE_KEY, locale);
+    try {
+      window.localStorage?.setItem(STORAGE_KEY, locale);
+    } catch {
+      // ignore storage errors in environments without storage
+    }
     set({ locale });
   },
 }));
