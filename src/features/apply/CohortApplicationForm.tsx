@@ -1,7 +1,13 @@
 import { useState } from "react";
-import styles from "./CohortApplicationForm.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { api } from "@core/api";
+import { messages, type Locale } from "@core/i18n";
+import styles from "./CohortApplicationForm.module.css";
+
+export interface CohortApplicationFormProps {
+  locale: Locale;
+  cohortSlug?: string;
+}
 
 interface ICohortApplicationReceipt {
   id: string;
@@ -31,12 +37,17 @@ interface IFormInput {
   motivation: string;
 }
 
-export default function CohortApplicationForm() {
+export function CohortApplicationForm({
+  locale,
+  cohortSlug = "cohort-2",
+}: CohortApplicationFormProps) {
+  const isAr = locale === "ar";
+  const copy = messages[locale].apply;
+
   const {
     register,
     handleSubmit,
     watch,
-    reset,
     setError: setFormError,
     formState: { errors },
   } = useForm<IFormInput>({
@@ -53,7 +64,7 @@ export default function CohortApplicationForm() {
     setIsSubmitting(true);
     setError(null);
     try {
-      const response = await api.applyCohort("cohort-2", data);
+      const response = await api.applyCohort(cohortSlug, data);
       setReceipt(response);
     } catch (err: any) {
       console.error("Error submitting form:", err);
@@ -68,10 +79,16 @@ export default function CohortApplicationForm() {
       } else if (err?.status === 409) {
         setError(
           err?.detail ||
-            "An application with this email or GitHub handle already exists for Cohort 2.",
+            (isAr
+              ? "يوجد طلب سابق بنفس البريد الإلكتروني أو حساب GitHub للدفعة الثانية."
+              : "An application with this email or GitHub handle already exists for Cohort 2."),
         );
       } else {
-        setError("An unexpected error occurred. Please try again later.");
+        setError(
+          isAr
+            ? "حدث خطأ غير متوقع. يرجى المحاولة لاحقاً."
+            : "An unexpected error occurred. Please try again later.",
+        );
       }
     } finally {
       setIsSubmitting(false);
@@ -81,34 +98,42 @@ export default function CohortApplicationForm() {
   if (receipt) {
     return (
       <div className={styles.receiptCard}>
-        <h2 className={styles.receiptTitle}>Application Submitted Successfully 🎉</h2>
+        <h2 className={styles.receiptTitle}>
+          {isAr ? "تم تقديم الطلب بنجاح 🎉" : "Application Submitted Successfully 🎉"}
+        </h2>
         <div className={styles.receiptDetails}>
           <p>
-            <strong>Application ID:</strong> {receipt.id}
+            <strong>{isAr ? "رقم الطلب:" : "Application ID:"}</strong> {receipt.id}
           </p>
           <p>
-            <strong>Email:</strong> {receipt.email}
+            <strong>{isAr ? "البريد الإلكتروني:" : "Email:"}</strong> {receipt.email}
           </p>
           <p>
-            <strong>Submitted At:</strong> {receipt.createdAt}
+            <strong>{isAr ? "تاريخ التقديم:" : "Submitted At:"}</strong> {receipt.createdAt}
           </p>
         </div>
-        <p style={{ marginTop: "1rem" }}>Thank you for your application!</p>
+        <p style={{ marginTop: "1rem" }}>
+          {isAr ? "شكراً لتقديمك في الورشة!" : "Thank you for your application!"}
+        </p>
       </div>
     );
   }
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Apply for Cohort 2</h2>
+      <h2 className={styles.title}>
+        {isAr ? "التقديم للدفعة الثانية" : "Apply for Cohort 2"}
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         {error && <div className={styles.alertError}>{error}</div>}
 
         <fieldset className={styles.fieldset}>
-          <legend className={styles.legend}>Personal & Contact Information</legend>
+          <legend className={styles.legend}>
+            {isAr ? "المعلومات الشخصية ومعلومات التواصل" : "Personal & Contact Information"}
+          </legend>
 
           <label htmlFor="fullName" className={styles.label}>
-            Full Name
+            {isAr ? "الاسم الكامل" : "Full Name"}
           </label>
           <input
             id="fullName"
@@ -128,7 +153,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="email" className={styles.label}>
-            Email
+            {isAr ? "البريد الإلكتروني" : "Email"}
           </label>
           <input
             id="email"
@@ -151,7 +176,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="whatsappNumber" className={styles.label}>
-            WhatsApp Number
+            {isAr ? "رقم الواتساب" : "WhatsApp Number"}
           </label>
           <input
             id="whatsappNumber"
@@ -162,7 +187,7 @@ export default function CohortApplicationForm() {
             {...register("whatsappNumber", {
               required: "WhatsApp number is required",
               pattern: {
-                value: /^\d{10,15}$/,
+                value: /^\+?\d{10,15}$/,
                 message: "WhatsApp number must be between 10 and 15 digits",
               },
             })}
@@ -174,7 +199,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="githubHandle" className={styles.label}>
-            GitHub Handle
+            {isAr ? "حساب GitHub" : "GitHub Handle"}
           </label>
           <input
             id="githubHandle"
@@ -184,10 +209,6 @@ export default function CohortApplicationForm() {
             aria-describedby={errors.githubHandle ? "githubHandle-error" : undefined}
             {...register("githubHandle", {
               required: "GitHub handle is required",
-              pattern: {
-                value: /^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$/,
-                message: "Invalid GitHub username format",
-              },
             })}
           />
           {errors.githubHandle && (
@@ -197,7 +218,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="discordHandle" className={styles.label}>
-            Discord Handle
+            {isAr ? "حساب Discord" : "Discord Handle"}
           </label>
           <input
             id="discordHandle"
@@ -215,10 +236,12 @@ export default function CohortApplicationForm() {
         </fieldset>
 
         <fieldset className={styles.fieldset}>
-          <legend className={styles.legend}>Technical Background</legend>
+          <legend className={styles.legend}>
+            {isAr ? "الخلفية التقنية" : "Technical Background"}
+          </legend>
 
           <label htmlFor="currentStatus" className={styles.label}>
-            Current Status
+            {isAr ? "الحالة الحالية" : "Current Status"}
           </label>
           <select
             id="currentStatus"
@@ -227,7 +250,7 @@ export default function CohortApplicationForm() {
             aria-describedby={errors.currentStatus ? "currentStatus-error" : undefined}
             {...register("currentStatus", { required: "Current status is required" })}
           >
-            <option value="">Select an option</option>
+            <option value="">{isAr ? "اختر خياراً" : "Select an option"}</option>
             <option value="student">Student</option>
             <option value="graduate">Graduate</option>
             <option value="working in tech">working in tech</option>
@@ -241,7 +264,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="collegeMajor" className={styles.label}>
-            College Major
+            {isAr ? "التخصص الجامعي" : "College Major"}
           </label>
           <input
             id="collegeMajor"
@@ -258,7 +281,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="programmingExperience" className={styles.label}>
-            Programming Experience
+            {isAr ? "خبرة البرمجة" : "Programming Experience"}
           </label>
           <input
             id="programmingExperience"
@@ -279,7 +302,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="technologies" className={styles.label}>
-            Technologies
+            {isAr ? "التقنيات" : "Technologies"}
           </label>
           <textarea
             id="technologies"
@@ -295,7 +318,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="gitExperience" className={styles.label}>
-            Git Experience
+            {isAr ? "خبرة Git" : "Git Experience"}
           </label>
           <select
             id="gitExperience"
@@ -304,7 +327,7 @@ export default function CohortApplicationForm() {
             aria-describedby={errors.gitExperience ? "gitExperience-error" : undefined}
             {...register("gitExperience", { required: "Git experience is required" })}
           >
-            <option value="">Select an option</option>
+            <option value="">{isAr ? "اختر خياراً" : "Select an option"}</option>
             <option value="never">never</option>
             <option value="basics only">basics only</option>
             <option value="comfortable">comfortable</option>
@@ -317,10 +340,12 @@ export default function CohortApplicationForm() {
         </fieldset>
 
         <fieldset className={styles.fieldset}>
-          <legend className={styles.legend}>Personal Page Task</legend>
+          <legend className={styles.legend}>
+            {isAr ? "مهمة الصفحة الشخصية" : "Personal Page Task"}
+          </legend>
 
           <label htmlFor="personalPageUrl" className={styles.label}>
-            Personal Page URL
+            {isAr ? "رابط الصفحة الشخصية" : "Personal Page URL"}
           </label>
           <input
             id="personalPageUrl"
@@ -345,7 +370,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="githubRepoUrl" className={styles.label}>
-            GitHub Repo URL
+            {isAr ? "رابط مستودع GitHub" : "GitHub Repo URL"}
           </label>
           <input
             id="githubRepoUrl"
@@ -368,7 +393,7 @@ export default function CohortApplicationForm() {
           )}
 
           <label htmlFor="aiUsage" className={styles.label}>
-            How you used AI tools (or if you didn't)?
+            {isAr ? "كيف استخدمت أدوات الذكاء الاصطناعي؟" : "How you used AI tools (or if you didn't)?"}
           </label>
           <textarea
             id="aiUsage"
@@ -385,10 +410,12 @@ export default function CohortApplicationForm() {
         </fieldset>
 
         <fieldset className={styles.fieldset}>
-          <legend className={styles.legend}>Motivation</legend>
+          <legend className={styles.legend}>
+            {isAr ? "الدافع والحافز" : "Motivation"}
+          </legend>
 
           <label htmlFor="motivation" className={styles.label}>
-            Why are you interested in this cohort?
+            {isAr ? "لماذا أنت مهتم بالانضمام للدفعة؟" : "Why are you interested in this cohort?"}
           </label>
           <textarea
             id="motivation"
@@ -412,43 +439,18 @@ export default function CohortApplicationForm() {
                 motivationValue.length >= 50 ? "var(--color-text-success)" : "inherit",
             }}
           >
-            {motivationValue.length} / 50 characters
+            {motivationValue.length} / 50 {isAr ? "حرف" : "characters"}
           </div>
         </fieldset>
 
         <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
-          {isSubmitting ? "Submitting..." : "Submit Application"}
+          {isSubmitting
+            ? isAr ? "جاري الإرسال..." : "Submitting..."
+            : copy?.submit || (isAr ? "تقديم الطلب" : "Submit Application")}
         </button>
       </form>
     </div>
-import { messages, type Locale } from "@core/i18n";
-import styles from "./CohortApplicationForm.module.css";
-
-export interface CohortApplicationFormProps {
-  locale: Locale;
-  cohortSlug?: string;
-}
-
-export function CohortApplicationForm({
-  locale,
-  cohortSlug: _cohortSlug = "cohort-2",
-}: CohortApplicationFormProps) {
-  const isAr = locale === "ar";
-  const copy = messages[locale].apply;
-
-  return (
-    <form className={styles.form}>
-      {/* TODO (Week 2): Implement the 4 fieldsets, inputs, and validation contract */}
-      <div className={styles.placeholder}>
-        <p>
-          {isAr
-            ? "استمارة التقديم — قيد الإنشاء (مهمة الأسبوع الثاني)"
-            : "Application form under construction (Week 2 Task)"}
-        </p>
-      </div>
-      <button type="submit" className={styles.submitButton}>
-        {copy.submit}
-      </button>
-    </form>
   );
 }
+
+export default CohortApplicationForm;
