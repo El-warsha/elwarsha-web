@@ -50,7 +50,7 @@ export function CohortApplicationForm({
   });
 
   const [motivationLength, setMotivationLength] = useState(
-    getInitialDraft().motivation?.length || 0,
+    getInitialDraft().motivation?.replace(/\s/g, "").length || 0,
   );
   const { onChange: formOnChange, ...restMotivationRegister } = register("motivation");
 
@@ -318,7 +318,7 @@ export function CohortApplicationForm({
           <textarea
             onChange={(e) => {
               formOnChange(e);
-              setMotivationLength(e.target.value.length);
+              setMotivationLength(e.target.value.replace(/\s/g, "").length);
             }}
             {...restMotivationRegister}
             id="motivation"

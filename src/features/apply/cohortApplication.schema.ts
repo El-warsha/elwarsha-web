@@ -35,7 +35,9 @@ export const cohortApplicationSchema = (local: Locale) => {
     githubRepoUrl: requiredString.regex(githubRepoRegex, { message: githubUrl }),
 
     aiUsage: requiredString,
-    motivation: requiredString.min(50, { message: minLength(50) }),
+    motivation: requiredString.refine((val) => val.replace(/\s/g, "").length >= 50, {
+      message: minLength(50),
+    }),
   });
 };
 
