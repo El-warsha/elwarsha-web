@@ -14,13 +14,13 @@ export function HomePage({ locale }: { locale: Locale }) {
       <h1>{copy.hero.title}</h1>
       <p className={styles.body}>{copy.hero.body}</p>
       <div className={styles.actions}>
-<<<<<<< HEAD
-        <ButtonLink href={`/${locale}/apply/`}>{copy.hero.apply}</ButtonLink>
-=======
+<<<<<<<<< Temporary merge branch 1
         <Link to={`/${locale}/apply/`} style={{ textDecoration: "none" }}>
           <Button>{copy.hero.apply}</Button>
         </Link>
->>>>>>> 6b9372ed173d1c822cb4c7363a9979d7721a8651
+=========
+        <ButtonLink href={`/${locale}/apply/`}>{copy.hero.apply}</ButtonLink>
+>>>>>>>>> Temporary merge branch 2
         <Link className={styles.textLink} to={`/${locale}/roadmap/`}>
           {copy.hero.method}
         </Link>
