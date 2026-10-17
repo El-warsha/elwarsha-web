@@ -10,4 +10,4 @@ export const applyRoute: RouteDescriptor = {
 };
 
 export { ApplyPage } from "./ApplyPage.js";
-export { CohortApplicationForm } from "./CohortApplicationForm.js";
+export { CohortApplicationForm } from "./components/CohortApplicationForm/CohortApplicationForm.js";

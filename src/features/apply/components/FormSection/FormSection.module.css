@@ -1,0 +1,42 @@
+.container {
+  margin-top: 30px;
+  background-color: white;
+  border: 2px solid var(--color-border-default);
+  padding: 25px 25px ;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 3px 3px 1px black;
+  border-radius: 3px;
+}
+
+.header {
+ display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+  padding: 10px 20px;
+}
+.number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: var(--color-surface-muted);
+    padding: 3px 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+  
+}
+.subtitle{
+  color:var(--color-text-secondary);
+  align-self: start;
+}
+.fields-container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
