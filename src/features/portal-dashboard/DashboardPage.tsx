@@ -29,6 +29,9 @@ export function DashboardPage({ locale }: { locale: Locale }) {
       <PageSection eyebrow={copy.portal.title} title={copy.portal.dashboard}>
         <p>{user.displayName}</p>
         <div className={styles.actions}>
+          <Link className={styles.link} to={`/${locale}/portal/weeks`}>
+            {copy.portal.weeks}
+          </Link>
           <Link className={styles.link} to={`/${locale}/portal/assignments`}>
             {copy.portal.assignments}
           </Link>

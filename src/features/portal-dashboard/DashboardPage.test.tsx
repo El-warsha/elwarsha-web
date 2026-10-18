@@ -94,6 +94,9 @@ describe("DashboardPage", () => {
     expect(await screen.findByRole("heading", { name: "This week" })).toBeInTheDocument();
     expect(screen.getByText("Test Participant")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Sign out" })).toBeInTheDocument();
+    const weeksLink = screen.getByRole("link", { name: "Weeks" });
+    expect(weeksLink).toBeInTheDocument();
+    expect(weeksLink).toHaveAttribute("href", "/en/portal/weeks");
     const assignmentsLink = screen.getByRole("link", { name: "Assignments" });
     expect(assignmentsLink).toBeInTheDocument();
     expect(assignmentsLink).toHaveAttribute("href", "/en/portal/assignments");
