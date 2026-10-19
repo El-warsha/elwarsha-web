@@ -1,0 +1,82 @@
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 16px 24px;
+  border-radius: var(--radius-sm, 4px);
+  border: var(--size-border-thin, 2px) solid #000000;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  z-index: 9999;
+  animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.success {
+  background-color: #10b981;
+  color: #ffffff;
+  box-shadow: 4px 4px 0 #000000;
+}
+
+.error {
+  background-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 4px 4px 0 #000000;
+}
+
+.warning {
+  background-color: #f59e0b;
+  color: #000000;
+  box-shadow: 4px 4px 0 #000000;
+}
+
+.info {
+  background-color: var(--color-brand-primary, #3b82f6);
+  color: #ffffff;
+  box-shadow: 4px 4px 0 #000000;
+}
+
+.icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  flex-grow: 1;
+  line-height: 1.4;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: currentColor;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 1.1rem;
+  opacity: 0.85;
+  transition:
+    transform 0.1s ease,
+    opacity 0.2s ease;
+  padding: 4px;
+}
+
+.closeBtn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

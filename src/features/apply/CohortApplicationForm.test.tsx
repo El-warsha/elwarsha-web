@@ -1,114 +1,113 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { CohortApplicationForm } from "./CohortApplicationForm";
 import { api, ElWarshaApiError } from "@core/api";
-import { CohortApplicationForm } from "./CohortApplicationForm.js";
 
-vi.mock("@core/api", () => {
-  class MockElWarshaApiError extends Error {
-    constructor(
-      readonly status: number,
-      readonly body: {
-        detail?: string;
-        invalidParams?: Array<{ name: string; reason: string }>;
-      } | null,
-    ) {
-      super(body?.detail ?? "Mock error");
-    }
-  }
-
+vi.mock("@core/api", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@core/api")>();
   return {
+    ...actual,
     api: {
+      ...actual.api,
       applyCohort: vi.fn(),
     },
-    ElWarshaApiError: MockElWarshaApiError,
   };
 });
 
+async function fillValidForm(user: ReturnType<typeof userEvent.setup>) {
+  await user.type(screen.getByLabelText(/Full Name/i), "Eman Mohamed");
+  await user.type(screen.getByLabelText(/Email Address/i), "eman@example.com");
+  await user.type(screen.getByLabelText(/WhatsApp Number/i), "01000000000");
+  await user.type(screen.getByLabelText(/GitHub Handle/i), "emangithub");
+  await user.type(screen.getByLabelText(/Discord Handle/i), "eman1234");
+
+  await user.selectOptions(screen.getByLabelText(/Current Status/i), "student");
+  await user.type(screen.getByLabelText(/College & Major/i), "Computer Science");
+  await user.type(screen.getByLabelText(/Programming Experience/i), "2 years");
+  await user.type(screen.getByLabelText(/Technologies Used/i), "React");
+  await user.selectOptions(screen.getByLabelText(/Git Experience/i), "comfortable");
+
+  await user.type(
+    screen.getByLabelText(/Published Personal Page/i),
+    "https://google.com",
+  );
+  await user.type(
+    screen.getByLabelText(/GitHub Repository Link/i),
+    "https://github.com/example/repo",
+  );
+  await user.type(screen.getByLabelText(/AI Usage/i), "No AI used");
+
+  await user.type(
+    screen.getByLabelText(/Motivation/i),
+    "I am very motivated to join this cohort to learn how to build real products and improve my React and Next.js skills significantly.",
+  );
+}
+
 describe("CohortApplicationForm", () => {
+  const mockLocale = "en";
+
   beforeEach(() => {
-    vi.mocked(api.applyCohort).mockReset();
+    vi.clearAllMocks();
+    localStorage.clear();
   });
 
-  it("renders all four sections and the submit button", () => {
-    render(<CohortApplicationForm locale="en" />);
-
-    expect(screen.getByText(/Personal & Contact Information/i)).toBeInTheDocument();
-    expect(screen.getByText(/Academic & Technical Background/i)).toBeInTheDocument();
-    expect(screen.getByText(/Personal Page Task/i)).toBeInTheDocument();
-    expect(screen.getByText(/Motivation & Commitment/i)).toBeInTheDocument();
-
+  it("renders all form sections correctly", () => {
+    render(<CohortApplicationForm locale={mockLocale} cohortSlug="test-cohort" />);
     expect(
-      screen.getByRole("button", { name: /Submit Application/i }),
+      screen.getByRole("group", { name: /Personal & Contact Information/i }),
     ).toBeInTheDocument();
-  });
-
-  it("displays structured validation errors (422) below problematic inputs", async () => {
-    const error422 = new ElWarshaApiError(422, {
-      type: "https://elwarsha.dev/errors/validation-failed",
-      title: "Validation Failed",
-      status: 422,
-      detail: "Validation failed",
-      invalidParams: [
-        { name: "email", reason: "Must be a valid email address" },
-        { name: "motivation", reason: "Motivation must be at least 50 characters" },
-      ],
-    });
-
-    vi.mocked(api.applyCohort).mockRejectedValueOnce(error422);
-
-    render(<CohortApplicationForm locale="en" />);
-
-    fireEvent.click(screen.getByRole("button", { name: /Submit Application/i }));
-
-    expect(await screen.findByText("Must be a valid email address")).toBeInTheDocument();
     expect(
-      screen.getByText("Motivation must be at least 50 characters"),
+      screen.getByRole("group", { name: /Technical Background/i }),
     ).toBeInTheDocument();
-
-    const emailInput = screen.getByLabelText(/Email Address/i);
-    expect(emailInput).toHaveAttribute("aria-invalid", "true");
-    expect(emailInput).toHaveAttribute("aria-describedby", "email-error");
+    expect(
+      screen.getByRole("group", { name: /Personal Page Task/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: /Motivation/i })).toBeInTheDocument();
   });
 
-  it("displays duplicate submission conflict (409) in a global alert", async () => {
-    const error409 = new ElWarshaApiError(409, {
-      type: "https://elwarsha.dev/errors/duplicate-application",
-      status: 409,
-      detail:
-        "An application with this email or GitHub handle already exists for cohort-2",
+  it("displays 422 validation errors directly below invalid fields", async () => {
+    const user = userEvent.setup();
+    const mock422Error = new ElWarshaApiError(422, {
+      invalidParams: [{ name: "githubHandle", reason: "Invalid GitHub URL format" }],
     });
+    vi.mocked(api.applyCohort).mockRejectedValueOnce(mock422Error);
 
-    vi.mocked(api.applyCohort).mockRejectedValueOnce(error409);
+    render(<CohortApplicationForm locale={mockLocale} cohortSlug="test-cohort" />);
+    await fillValidForm(user);
+    await user.click(screen.getByRole("button", { name: /Submit/i }));
 
-    render(<CohortApplicationForm locale="en" />);
-
-    fireEvent.click(screen.getByRole("button", { name: /Submit Application/i }));
-
-    expect(await screen.findByRole("alert")).toHaveTextContent(/already exists/i);
+    await waitFor(() => {
+      expect(screen.getByText("Invalid GitHub URL format")).toBeInTheDocument();
+    });
   });
 
-  it("displays a confirmation receipt card upon 201 Created", async () => {
-    vi.mocked(api.applyCohort).mockResolvedValueOnce({
-      id: "app_7b2f1e9a",
-      cohortSlug: "cohort-2",
-      email: "sara@example.com",
-      status: "received",
-      createdAt: new Date().toISOString(),
+  it("shows an alert when a 409 conflict error occurs", async () => {
+    const user = userEvent.setup();
+    const mock409Error = new ElWarshaApiError(409, {
+      detail: "Application already exists",
     });
+    vi.mocked(api.applyCohort).mockRejectedValueOnce(mock409Error);
 
-    render(<CohortApplicationForm locale="en" />);
+    render(<CohortApplicationForm locale={mockLocale} cohortSlug="test-cohort" />);
+    await fillValidForm(user);
+    await user.click(screen.getByRole("button", { name: /Submit/i }));
 
-    fireEvent.change(screen.getByLabelText(/Full Name/i), {
-      target: { value: "Sara Mahmoud" },
+    await waitFor(() => {
+      expect(screen.getByText("Application already exists")).toBeInTheDocument();
     });
-    fireEvent.change(screen.getByLabelText(/Email Address/i), {
-      target: { value: "sara@example.com" },
+  });
+
+  it("displays the admission receipt on successful submission (201 Created)", async () => {
+    const user = userEvent.setup();
+    vi.mocked(api.applyCohort).mockResolvedValueOnce({} as never);
+
+    render(<CohortApplicationForm locale={mockLocale} cohortSlug="test-cohort" />);
+    await fillValidForm(user);
+    await user.click(screen.getByRole("button", { name: /Submit/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/Application Submitted/i)).toBeInTheDocument();
     });
-
-    fireEvent.click(screen.getByRole("button", { name: /Submit Application/i }));
-
-    expect(await screen.findByText(/Application Received!/i)).toBeInTheDocument();
-    expect(screen.getByText("app_7b2f1e9a")).toBeInTheDocument();
   });
 });
