@@ -12,11 +12,13 @@ import { useSubmitApplication } from "./useSubmitApplication";
 export interface CohortApplicationFormProps {
   locale: Locale;
   cohortSlug?: string;
+  onSuccess?: (receipt: CohortApplicationResponse) => void;
 }
 
 export function CohortApplicationForm({
   locale,
-  cohortSlug: _cohortSlug = "cohort-2",
+  cohortSlug = "cohort-2",
+  onSuccess,
 }: CohortApplicationFormProps) {
   const DRAFT_KEY = `cohort-application-draft-${_cohortSlug}`;
   const copy = messages[locale].apply;
