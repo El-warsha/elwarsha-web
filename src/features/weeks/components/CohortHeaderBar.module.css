@@ -1,0 +1,95 @@
+.cohortHeader {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: var(--spacing-24);
+
+padding: var(--spacing-24);
+
+color: var(--color-text-primary);
+background: var(--color-surface-muted);
+
+border: var(--size-border-thin) solid var(--line);
+border-radius: var(--radius-md);
+
+box-shadow: var(--shadow-hard);
+}
+
+.cohortHeaderInfo {
+min-width: 0;
+}
+
+.cohortHeaderEyebrow {
+margin: 0 0 var(--spacing-8);
+
+color: var(--color-text-brand);
+font-family: var(--font-mono);
+font-size: 0.75rem;
+letter-spacing: 0.08em;
+font-weight: 700;
+}
+
+.cohortHeaderTitle {
+margin: 0;
+
+color: var(--color-text-primary);
+font-family: var(--font-display);
+font-size: clamp(1.5rem, 3vw, 2rem);
+font-weight: 800;
+line-height: 1.3;
+overflow-wrap: anywhere;
+}
+
+.cohortHeaderDates {
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+gap: var(--spacing-8);
+
+margin: var(--spacing-12) 0 0;
+
+color: var(--color-text-secondary);
+font-family: var(--font-body);
+font-size: 0.875rem;
+}
+
+.cohortHeaderDateSeparator {
+color: var(--color-text-brand);
+}
+
+.cohortHeaderweek {
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+gap: var(--spacing-8);
+
+flex-shrink: 0;
+}
+
+.cohortHeaderWeeklabel {
+color: var(--color-text-secondary);
+font-family: var(--font-mono);
+font-size: 0.6875rem;
+font-weight: 700;
+letter-spacing: 0.06em;
+text-align: right;
+}
+
+.cohortHeaderWeekbadge {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+
+min-height: var(--size-button-md);
+padding: var(--spacing-8) var(--spacing-16);
+
+color: var(--color-text-on-brand);
+background: var(--color-brand-primary);
+
+border-radius: var(--radius-full);
+
+font-family: var(--font-display);
+font-size: 0.875rem;
+font-weight: 800;
+white-space: nowrap;
+}
