@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { messages, type Locale } from "@core/i18n";
 import { PageSection } from "@ui/patterns/PageSection/PageSection";
 import { StatePanel } from "@ui/patterns/StatePanel/StatePanel";
-import { useCohortWeekDetail } from "./useCohortWeekDetail.js";
+import { useCohortWeekDetail } from "./hooks/useCohortWeekDetail.js";
 import { WeekLockedView } from "./components/WeekLockedView.js";
 import { WeekHeader } from "./components/WeekHeader.js";
 import { WeekOutcomesList } from "./components/WeekOutcomesList.js";
@@ -80,10 +80,7 @@ export function WeekDetailPage({ locale }: { locale: Locale }) {
 
       <WeekHeader week={week} copy={copy} />
 
-      <WeekOutcomesList
-        outcomes={week.outcomes}
-        title={copy.portal.learningOutcomes}
-      />
+      <WeekOutcomesList outcomes={week.outcomes} title={copy.portal.learningOutcomes} />
 
       <WeekConceptsGrid
         coreConcepts={week.coreConcepts}
@@ -95,9 +92,7 @@ export function WeekDetailPage({ locale }: { locale: Locale }) {
         title={copy.portal.appliedThroughTheStack}
       />
 
-      {week.assignment && (
-        <WeekAssignmentCard assignment={week.assignment} copy={copy} />
-      )}
+      {week.assignment && <WeekAssignmentCard assignment={week.assignment} copy={copy} />}
 
       <WeekResourcesSection resources={week.resources} copy={copy} />
 

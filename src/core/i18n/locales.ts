@@ -138,6 +138,24 @@ export const messages = {
       submissions: "التسليمات",
       reviews: "المراجعات",
       signOut: "تسجيل الخروج",
+         weeksPage:{
+currentWeek:'',
+
+lockedWeekCard: {
+  status: "مغلق",
+  week: "الأسبوع",
+  details: "عرض التفاصيل",
+},
+weekCard: {
+  week: "الأسبوع",
+  details: "عرض التفاصيل",
+},
+cohortHeaderBar: {
+  eyebrow: "نظرة عامة على الدفعة",
+  currentWeek: "الأسبوع الحالي",
+},
+
+    },
     },
     apply: {
       eyebrow: "الدفعة القادمة / Cohort 02",
@@ -151,6 +169,7 @@ export const messages = {
       note: "الورشة تتطلب تخصيص وقت كافي أسبوعياً للمشاركة والمراجعات. نرجو ملء كافة الحقول بدقة، والحرص على كتابة دافعك بوضوح ورابط الصفحة الشخصية ومستودع GitHub.",
       submit: "إرسال طلب التقديم",
     },
+ 
     error: "حصل خطأ في الورشة. حدّث الصفحة وحاول تاني.",
     footer: "تعلّم قدام الناس. ابنِ لحاجة حقيقية.",
     language: "English",
@@ -284,6 +303,24 @@ export const messages = {
       submissions: "Submissions",
       reviews: "Reviews",
       signOut: "Sign out",
+          weeksPage:{
+      currentWeek:'Current Week',
+      
+lockedWeekCard: {
+  status: "Locked",
+  week: "Week",
+  details: "View details",
+},
+weekCard: {
+  week: "Week",
+  details: "View details",
+},
+cohortHeaderBar: {
+  eyebrow: "COHORT OVERVIEW",
+  currentWeek: "Current week",
+},
+
+    },
     },
     apply: {
       eyebrow: "Upcoming Cohort / Cohort 02",
@@ -297,6 +334,7 @@ export const messages = {
       note: "The workshop requires a serious weekly time commitment for coding and peer reviews. Please fill all fields accurately, including your published personal page and repository links.",
       submit: "Submit Application",
     },
+
     error: "Something broke in the workshop. Reload and try again.",
     footer: "Learn in public. Build for real.",
     language: "العربية",

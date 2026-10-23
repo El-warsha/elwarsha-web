@@ -1,0 +1,74 @@
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+
+  min-width: 0;
+  padding: var(--spacing-24);
+
+  color: var(--color-text-primary);
+  background: var(--color-surface-muted);
+
+  border: var(--size-border-thin) solid
+    var(--color-border-default);
+  border-radius: var(--radius-md);
+
+  opacity: 0.72;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+}
+
+.status {
+  padding: var(--spacing-4) var(--spacing-12);
+
+  color: var(--color-text-secondary);
+  background:  var(--color-surface-muted);
+
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.weekNumber {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.concept {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.disabledLink {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: var(--spacing-8);
+
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  cursor: not-allowed;
+}
+
+
+

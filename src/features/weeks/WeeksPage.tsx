@@ -2,6 +2,11 @@ import { useParams } from "react-router-dom";
 
 import { messages, type Locale } from "@core/i18n";
 import styles from "./WeeksPage.module.css";
+import { useCohortWeeks } from "./hooks/useCohortWeeks";
+import { WeekCard } from "./components/week-card/WeekCard";
+import { Week } from "./validations/weeks.schema";
+import { CohortHeaderBar } from "./components/cohort-header-bar/CohortHeaderBar";
+import { LockedWeekCard } from "./components/locked-week-card/LockedWeekCard";
 
 /**
  * Week 3 Assignment: Weeks Summary Page
@@ -24,7 +29,15 @@ import styles from "./WeeksPage.module.css";
 export function WeeksPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
   const { cohortSlug = "cohort-01" } = useParams();
+  const { data: weeks, isPending, error } = useCohortWeeks(cohortSlug, locale);
 
+  if (isPending) {
+    return <section className={styles.error}>{copy.portal.loading}</section>;
+  }
+
+  if (error) {
+    return <section className={styles.error}>{copy.error}</section>;
+  }
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -42,19 +55,41 @@ export function WeeksPage({ locale }: { locale: Locale }) {
           textAlign: "center",
         }}
       >
-        <h2
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "1.5rem",
-            margin: "0 0 var(--space-2)",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          {locale === "ar"
-            ? "مهمة الأسبوع الثالث: بناء صفحة ملخص الأسابيع"
-            : "Week 3 Assignment: Build the Weeks Summary Page"}
-        </h2>
-        <p
+        <CohortHeaderBar
+          cohortName={cohortSlug}
+          currentWeekNumber={weeks[0].cohort.currentWeekNumber}
+          locale={locale}
+          startDate={weeks[0].cohort.startsOn}
+          endDate={weeks[0].cohort.endsOn}
+        ></CohortHeaderBar>
+          <div className={styles.cardsContainer}>
+        {weeks?.map((week: Week) => {
+          if(week.isLocked){
+return <LockedWeekCard
+            key={week.title}
+            locale={locale}
+            // status={week.status}
+            title={week.title}
+            weekNumber={week.weekNumber}
+            concept={week.concept}
+          ></LockedWeekCard>}
+          if(week.status==='active'||week.status==='completed'){
+            return <WeekCard
+            key={week.title}
+            locale={locale}
+            status={week.status}
+            title={week.title}
+            weekNumber={week.weekNumber}
+            concept={week.concept}
+          ></WeekCard>}
+          
+        
+      
+      })
+      }
+        </div>
+
+        {/* <p
           style={{
             fontFamily: "var(--font-body)",
             fontSize: "1rem",
@@ -95,7 +130,7 @@ export function WeeksPage({ locale }: { locale: Locale }) {
             <li>Render the cards grid here in <code>WeeksPage.tsx</code></li>
             <li>Add unit tests in <code>WeeksPage.test.tsx</code></li>
           </ul>
-        </div>
+        </div> */}
       </section>
     </div>
   );

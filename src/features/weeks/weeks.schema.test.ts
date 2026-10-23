@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { weekSchema } from "./weeks.schema.js";
+import { weekSchema } from "./validations/weeks.schema.js";
 
 describe("weeks.schema", () => {
   const validWeek = {
@@ -71,8 +71,6 @@ describe("weeks.schema", () => {
   });
 
   it("fails parsing if status is not an allowed enum", () => {
-    expect(() =>
-      weekSchema.parse({ ...validWeek, status: "unknown" }),
-    ).toThrow();
+    expect(() => weekSchema.parse({ ...validWeek, status: "unknown" })).toThrow();
   });
 });

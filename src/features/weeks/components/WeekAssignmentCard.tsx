@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { marked } from "marked";
 import type { messages, Locale } from "@core/i18n";
 import { Badge } from "@ui/components/Badge/Badge";
-import type { WeekAssignment } from "../weeks.schema.js";
+import type { WeekAssignment } from "../validations/weeks.schema.js";
 import styles from "../WeekDetailPage.module.css";
 
 export interface WeekAssignmentCardProps {

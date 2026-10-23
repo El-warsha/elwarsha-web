@@ -259,3 +259,29 @@
 :global([dir="rtl"]) .weekCard:hover .cardFooter span {
   transform: translateX(-4px);
 }
+
+.cardsContainer{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 25px;
+}
+@media (min-width: 768px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardsContainer {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.error{
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(178, 32, 32);
+  font-size: x-large;
+}

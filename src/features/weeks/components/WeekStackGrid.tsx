@@ -1,4 +1,4 @@
-import type { WeekAppliedLayer } from "../weeks.schema.js";
+import type { WeekAppliedLayer } from "../validations/weeks.schema.js";
 import styles from "../WeekDetailPage.module.css";
 
 export interface WeekStackGridProps {
