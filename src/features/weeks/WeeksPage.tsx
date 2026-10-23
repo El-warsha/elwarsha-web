@@ -1,6 +1,10 @@
 import { useParams } from "react-router-dom";
 
 import { messages, type Locale } from "@core/i18n";
+import { CohortHeaderBar } from "./components/CohortHeaderBar.js";
+import { LockedWeekCard } from "./components/LockedWeekCard.js";
+import { WeekCard } from "./components/WeekCard.js";
+import { useCohortWeeks } from "./useCohortWeeks.js";
 import styles from "./WeeksPage.module.css";
 
 /**
@@ -25,6 +29,14 @@ export function WeeksPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
   const { cohortSlug = "cohort-01" } = useParams();
 
+  const {
+    data: weeks,
+    isLoading,
+    isError,
+  } = useCohortWeeks(cohortSlug, locale);
+
+  const cohort = weeks?.[0]?.cohort;
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -33,70 +45,49 @@ export function WeeksPage({ locale }: { locale: Locale }) {
         <p className={styles.lead}>{copy.portal.weeksSubtitle}</p>
       </header>
 
-      <section
-        style={{
-          padding: "var(--space-6) var(--space-4)",
-          background: "var(--color-surface-muted)",
-          border: "2px dashed var(--color-border-default)",
-          borderRadius: "var(--radius-lg)",
-          textAlign: "center",
-        }}
-      >
-        <h2
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "1.5rem",
-            margin: "0 0 var(--space-2)",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          {locale === "ar"
-            ? "مهمة الأسبوع الثالث: بناء صفحة ملخص الأسابيع"
-            : "Week 3 Assignment: Build the Weeks Summary Page"}
-        </h2>
-        <p
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "1rem",
-            color: "var(--color-text-secondary)",
-            maxWidth: "60ch",
-            margin: "0 auto var(--space-4)",
-          }}
-        >
-          {locale === "ar"
-            ? "قم بالاتصال بالخادم باستخدام React Query والتحقق من صحة البيانات باستخدام Zod، وبناء بطاقات الأسابيع بمكونات منفصلة."
-            : "Connect to the backend with React Query, validate the response with Zod, and render the weekly cards with separate components."}
+      {isLoading && (
+        <p role="status">
+          {locale === "ar" ? "جاري تحميل الأسابيع..." : "Loading weeks..."}
         </p>
-        <div
-          style={{
-            display: "inline-block",
-            textAlign: "start",
-            background: "var(--color-surface-default, #fff)",
-            padding: "var(--space-4)",
-            borderRadius: "var(--radius-md)",
-            border: "1px solid var(--color-border-default)",
-          }}
-        >
-          <h3 style={{ margin: "0 0 var(--space-2)", fontSize: "0.95rem", fontWeight: 700 }}>
-            {locale === "ar" ? "قائمة متطلبات المهمة:" : "Assignment Checklist:"}
-          </h3>
-          <ul
-            style={{
-              margin: 0,
-              paddingInlineStart: "1.2rem",
-              lineHeight: 1.8,
-              fontSize: "0.9rem",
-            }}
-          >
-            <li>Migrate DB in <code>elwarsha-api</code> (add <code>currentWeekNumber</code>)</li>
-            <li>Implement <code>useCohortWeeks(cohortSlug, locale)</code> in <code>useCohortWeeks.ts</code></li>
-            <li>Create <code>CohortHeaderBar.tsx</code> (1 component per file)</li>
-            <li>Create <code>WeekCard.tsx</code> and <code>LockedWeekCard.tsx</code></li>
-            <li>Render the cards grid here in <code>WeeksPage.tsx</code></li>
-            <li>Add unit tests in <code>WeeksPage.test.tsx</code></li>
-          </ul>
-        </div>
-      </section>
+      )}
+
+      {isError && (
+        <p role="alert">
+          {locale === "ar"
+            ? "حدث خطأ أثناء تحميل الأسابيع. حاولي مرة أخرى."
+            : "Failed to load weeks. Please try again."}
+        </p>
+      )}
+
+      {!isLoading && !isError && weeks?.length === 0 && (
+        <p>
+          {locale === "ar" ? "لا توجد أسابيع متاحة." : "No weeks found."}
+        </p>
+      )}
+
+      {!isLoading && !isError && weeks && weeks.length > 0 && cohort && (
+        <>
+          <CohortHeaderBar cohort={cohort} locale={locale} />
+
+          <section className={styles.weeksGrid}>
+            {weeks.map((week) =>
+              week.isLocked ? (
+                <LockedWeekCard
+                  key={week.weekNumber}
+                  week={week}
+                  locale={locale}
+                />
+              ) : (
+                <WeekCard
+                  key={week.weekNumber}
+                  week={week}
+                  locale={locale}
+                />
+              ),
+            )}
+          </section>
+        </>
+      )}
     </div>
   );
 }
