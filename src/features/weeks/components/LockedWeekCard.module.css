@@ -1,0 +1,54 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-surface-muted);
+  border: 1px dashed var(--color-border-default);
+  border-radius: var(--radius-md);
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.weekNumber {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+}
+
+.padlock {
+  font-size: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-text-primary);
+}
+
+.notice {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.disabledLink {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
