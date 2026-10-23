@@ -30,8 +30,15 @@ export function useTasks() {
 
   const visibleTasks = useMemo(() => {
     if (!tasks || selectedLabelId === null) return tasks;
-    return tasks.filter((task) => task.labels.some((label) => label.id === selectedLabelId));
+    return tasks.filter((task) =>
+      task.labels.some((label) => label.id === selectedLabelId),
+    );
   }, [tasks, selectedLabelId]);
 
-  return { tasks: visibleTasks, labels, selectedLabelId, selectLabel: setSelectedLabelId };
+  return {
+    tasks: visibleTasks,
+    labels,
+    selectedLabelId,
+    selectLabel: setSelectedLabelId,
+  };
 }
