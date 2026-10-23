@@ -5,7 +5,7 @@ This repository is the web app (`elwarsha-web`). The API lives in the sibling
 `ElWarsha-api` folder.
 
 The API lives in the sibling `ElWarsha-api` repository. This app pins
-`@elwarsha/api-client@0.1.0`.
+`@elwarsha/api-client@0.2.0`.
 
 ## Local setup
 
