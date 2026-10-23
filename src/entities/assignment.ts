@@ -1,7 +1,10 @@
-export type Assignment = {
+import type { Assignment as AssignmentDto } from "@core/api/generated";
+
+export type Label = {
   id: string;
-  weekNumber: number;
-  title: string;
-  status: "draft" | "published" | "closed";
-  engagementId: string;
+  name: string;
+};
+
+export type Assignment = AssignmentDto & {
+  labels: Label[];
 };
