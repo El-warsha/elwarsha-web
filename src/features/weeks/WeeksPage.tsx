@@ -11,9 +11,6 @@ import { StatePanel } from "@ui/patterns/StatePanel/StatePanel";
 /**
  * Week 3 Assignment: Weeks Summary Page
  *
- * Requirements:
- * 1. Backend: In elwarsha-api, add `currentWeekNumber Int @default(1)` to the Cohort model,
- *    run `prisma migrate dev --name add_cohort_current_week`, and wire it into WeeksService.
  * 2. Data fetching: Implement `useCohortWeeks(cohortSlug, locale)` in `useCohortWeeks.ts` using
  *    TanStack React Query (`useQuery`) and validate data with Zod schemas in `weeks.schema.ts`.
  * 3. Components (1 component per file):
