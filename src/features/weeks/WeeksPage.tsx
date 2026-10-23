@@ -89,48 +89,7 @@ return <LockedWeekCard
       }
         </div>
 
-        {/* <p
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "1rem",
-            color: "var(--color-text-secondary)",
-            maxWidth: "60ch",
-            margin: "0 auto var(--space-4)",
-          }}
-        >
-          {locale === "ar"
-            ? "قم بالاتصال بالخادم باستخدام React Query والتحقق من صحة البيانات باستخدام Zod، وبناء بطاقات الأسابيع بمكونات منفصلة."
-            : "Connect to the backend with React Query, validate the response with Zod, and render the weekly cards with separate components."}
-        </p>
-        <div
-          style={{
-            display: "inline-block",
-            textAlign: "start",
-            background: "var(--color-surface-default, #fff)",
-            padding: "var(--space-4)",
-            borderRadius: "var(--radius-md)",
-            border: "1px solid var(--color-border-default)",
-          }}
-        >
-          <h3 style={{ margin: "0 0 var(--space-2)", fontSize: "0.95rem", fontWeight: 700 }}>
-            {locale === "ar" ? "قائمة متطلبات المهمة:" : "Assignment Checklist:"}
-          </h3>
-          <ul
-            style={{
-              margin: 0,
-              paddingInlineStart: "1.2rem",
-              lineHeight: 1.8,
-              fontSize: "0.9rem",
-            }}
-          >
-            <li>Migrate DB in <code>elwarsha-api</code> (add <code>currentWeekNumber</code>)</li>
-            <li>Implement <code>useCohortWeeks(cohortSlug, locale)</code> in <code>useCohortWeeks.ts</code></li>
-            <li>Create <code>CohortHeaderBar.tsx</code> (1 component per file)</li>
-            <li>Create <code>WeekCard.tsx</code> and <code>LockedWeekCard.tsx</code></li>
-            <li>Render the cards grid here in <code>WeeksPage.tsx</code></li>
-            <li>Add unit tests in <code>WeeksPage.test.tsx</code></li>
-          </ul>
-        </div> */}
+   
       </section>
     </div>
   );
