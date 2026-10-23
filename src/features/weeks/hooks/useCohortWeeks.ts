@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
 import type { Locale } from "@core/i18n";
-import type { Week } from "./weeks.schema.js";
+import {  weeksSchema, type Week } from "../validations/weeks.schema.js";
+import { api } from "@core/api/index.js";
 
 /**
  * Hook to fetch weeks list for a cohort.
@@ -20,10 +21,18 @@ export function useCohortWeeks(
 ) {
   return useQuery<Week[]>({
     queryKey: ["cohorts", _cohortSlug, "weeks", { locale: _locale }],
+
     queryFn: async () => {
       // TODO (Week 3 Task): Fetch from api.listCohortWeeks and validate with Zod
-      return [];
+
+     const data=await api.listCohortWeeks(_cohortSlug,{locale:_locale})
+     return weeksSchema.parse(data)
+      
     },
-    enabled: false,
+    
+    enabled:
+      Boolean(_cohortSlug) &&
+    
+      (_options?.enabled ?? true)
   });
 }

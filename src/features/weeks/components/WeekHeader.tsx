@@ -1,6 +1,6 @@
 import type { messages, Locale } from "@core/i18n";
 import { Badge } from "@ui/components/Badge/Badge";
-import type { Week } from "../weeks.schema.js";
+import type { Week } from "../validations/weeks.schema.js";
 import styles from "../WeekDetailPage.module.css";
 
 export interface WeekHeaderProps {

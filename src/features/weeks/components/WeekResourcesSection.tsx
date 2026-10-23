@@ -1,5 +1,5 @@
 import type { messages, Locale } from "@core/i18n";
-import type { WeekResources } from "../weeks.schema.js";
+import type { WeekResources } from "../validations/weeks.schema.js";
 import { ResourceTable } from "./ResourceTable.js";
 import styles from "../WeekDetailPage.module.css";
 

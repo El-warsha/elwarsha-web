@@ -65,9 +65,14 @@ export const weekSchema = z.object({
   prerequisites: z.array(z.string()).default([]),
 });
 
+// zod schema for an array of weeks 
+export const weeksSchema=z.array(weekSchema)
+
 export type CohortRef = z.infer<typeof cohortRefSchema>;
 export type WeekResourceItem = z.infer<typeof weekResourceItemSchema>;
 export type WeekResources = z.infer<typeof weekResourcesSchema>;
 export type WeekAppliedLayer = z.infer<typeof weekAppliedLayerSchema>;
 export type WeekAssignment = z.infer<typeof weekAssignmentSchema>;
 export type Week = z.infer<typeof weekSchema>;
+export type Weeks = z.infer<typeof weeksSchema>;
+

@@ -6,7 +6,7 @@ import { api } from "@core/api";
 import { renderWithQueryClient } from "@test/query-wrapper";
 import { WeekDetailPage } from "./WeekDetailPage.js";
 
-import type { Week } from "./weeks.schema.js";
+import type { Week } from "./validations/weeks.schema.js";
 
 vi.mock("@core/api", () => ({
   api: {
@@ -95,9 +95,7 @@ describe("WeekDetailPage", () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText(/How does a request travel/)).toBeInTheDocument();
-    expect(
-      screen.getByText(/Trace a complete vertical slice/),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Trace a complete vertical slice/)).toBeInTheDocument();
     expect(
       screen.getByText("Trace a request from HTTP entry to module"),
     ).toBeInTheDocument();

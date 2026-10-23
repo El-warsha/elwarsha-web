@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { api } from "@core/api";
 import type { Locale } from "@core/i18n";
-import { weekSchema, type Week } from "./weeks.schema.js";
+import { weekSchema, type Week } from "../validations/weeks.schema.js";
 
 export function useCohortWeekDetail(
   cohortSlug: string,

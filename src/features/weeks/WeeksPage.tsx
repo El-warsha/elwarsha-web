@@ -2,6 +2,11 @@ import { useParams } from "react-router-dom";
 
 import { messages, type Locale } from "@core/i18n";
 import styles from "./WeeksPage.module.css";
+import { useCohortWeeks } from "./hooks/useCohortWeeks";
+import { WeekCard } from "./components/week-card/WeekCard";
+import { Week } from "./validations/weeks.schema";
+import { CohortHeaderBar } from "./components/cohort-header-bar/CohortHeaderBar";
+import { LockedWeekCard } from "./components/locked-week-card/LockedWeekCard";
 
 /**
  * Week 3 Assignment: Weeks Summary Page
@@ -24,7 +29,15 @@ import styles from "./WeeksPage.module.css";
 export function WeeksPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
   const { cohortSlug = "cohort-01" } = useParams();
+  const { data: weeks, isPending, error } = useCohortWeeks(cohortSlug, locale);
 
+  if (isPending) {
+    return <section className={styles.error}>{copy.portal.loading}</section>;
+  }
+
+  if (error) {
+    return <section className={styles.error}>{copy.error}</section>;
+  }
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -42,60 +55,41 @@ export function WeeksPage({ locale }: { locale: Locale }) {
           textAlign: "center",
         }}
       >
-        <h2
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "1.5rem",
-            margin: "0 0 var(--space-2)",
-            color: "var(--color-text-primary)",
-          }}
-        >
-          {locale === "ar"
-            ? "مهمة الأسبوع الثالث: بناء صفحة ملخص الأسابيع"
-            : "Week 3 Assignment: Build the Weeks Summary Page"}
-        </h2>
-        <p
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "1rem",
-            color: "var(--color-text-secondary)",
-            maxWidth: "60ch",
-            margin: "0 auto var(--space-4)",
-          }}
-        >
-          {locale === "ar"
-            ? "قم بالاتصال بالخادم باستخدام React Query والتحقق من صحة البيانات باستخدام Zod، وبناء بطاقات الأسابيع بمكونات منفصلة."
-            : "Connect to the backend with React Query, validate the response with Zod, and render the weekly cards with separate components."}
-        </p>
-        <div
-          style={{
-            display: "inline-block",
-            textAlign: "start",
-            background: "var(--color-surface-default, #fff)",
-            padding: "var(--space-4)",
-            borderRadius: "var(--radius-md)",
-            border: "1px solid var(--color-border-default)",
-          }}
-        >
-          <h3 style={{ margin: "0 0 var(--space-2)", fontSize: "0.95rem", fontWeight: 700 }}>
-            {locale === "ar" ? "قائمة متطلبات المهمة:" : "Assignment Checklist:"}
-          </h3>
-          <ul
-            style={{
-              margin: 0,
-              paddingInlineStart: "1.2rem",
-              lineHeight: 1.8,
-              fontSize: "0.9rem",
-            }}
-          >
-            <li>Migrate DB in <code>elwarsha-api</code> (add <code>currentWeekNumber</code>)</li>
-            <li>Implement <code>useCohortWeeks(cohortSlug, locale)</code> in <code>useCohortWeeks.ts</code></li>
-            <li>Create <code>CohortHeaderBar.tsx</code> (1 component per file)</li>
-            <li>Create <code>WeekCard.tsx</code> and <code>LockedWeekCard.tsx</code></li>
-            <li>Render the cards grid here in <code>WeeksPage.tsx</code></li>
-            <li>Add unit tests in <code>WeeksPage.test.tsx</code></li>
-          </ul>
+        <CohortHeaderBar
+          cohortName={cohortSlug}
+          currentWeekNumber={weeks[0].cohort.currentWeekNumber}
+          locale={locale}
+          startDate={weeks[0].cohort.startsOn}
+          endDate={weeks[0].cohort.endsOn}
+        ></CohortHeaderBar>
+          <div className={styles.cardsContainer}>
+        {weeks?.map((week: Week) => {
+          if(week.isLocked){
+return <LockedWeekCard
+            key={week.title}
+            locale={locale}
+            // status={week.status}
+            title={week.title}
+            weekNumber={week.weekNumber}
+            concept={week.concept}
+          ></LockedWeekCard>}
+          if(week.status==='active'||week.status==='completed'){
+            return <WeekCard
+            key={week.title}
+            locale={locale}
+            status={week.status}
+            title={week.title}
+            weekNumber={week.weekNumber}
+            concept={week.concept}
+          ></WeekCard>}
+          
+        
+      
+      })
+      }
         </div>
+
+   
       </section>
     </div>
   );
