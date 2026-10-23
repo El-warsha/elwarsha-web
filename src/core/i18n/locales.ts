@@ -79,6 +79,8 @@ export const messages = {
       unavailable: "تسجيل الدخول والكتابة الحقيقية لسه مش مفتوحين في الأساس.",
       empty: "مفيش عناصر للعرض.",
       loading: "بنجهّز الورشة…",
+      labelFilterGroup: "تصفية حسب التصنيف",
+      labelFilterAll: "الكل",
       dashboard: "لوحة الأسبوع",
       products: "المنتجات",
       cohorts: "الدفعات",
@@ -161,6 +163,8 @@ export const messages = {
       unavailable:
         "Real sign-in and writes are intentionally incomplete in this foundation.",
       loading: "Preparing the workshop…",
+      labelFilterGroup: "Filter by label",
+      labelFilterAll: "All",
       empty: "Nothing to show yet.",
       dashboard: "This week",
       products: "Products",
