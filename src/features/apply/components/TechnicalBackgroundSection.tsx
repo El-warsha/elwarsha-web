@@ -5,7 +5,9 @@ import styles from "../CohortApplicationForm.module.css";
 export interface TechnicalBackgroundSectionProps {
   formData: ApplyCohortInput;
   fieldErrors: Record<string, string>;
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => void;
   isAr: boolean;
 }
 
@@ -44,9 +46,7 @@ export function TechnicalBackgroundSection({
             value={formData.currentStatus}
             onChange={handleChange}
           >
-            <option value="student">
-              {isAr ? "طالب جامعي" : "University Student"}
-            </option>
+            <option value="student">{isAr ? "طالب جامعي" : "University Student"}</option>
             <option value="recent_graduate">
               {isAr ? "خريج حديث" : "Recent Graduate"}
             </option>
@@ -79,9 +79,7 @@ export function TechnicalBackgroundSection({
             value={formData.collegeMajor}
             onChange={handleChange}
             aria-invalid={Boolean(fieldErrors.collegeMajor)}
-            aria-describedby={
-              fieldErrors.collegeMajor ? "collegeMajor-error" : undefined
-            }
+            aria-describedby={fieldErrors.collegeMajor ? "collegeMajor-error" : undefined}
           />
           {fieldErrors.collegeMajor && (
             <span id="collegeMajor-error" role="alert" className={styles.errorText}>
@@ -94,9 +92,7 @@ export function TechnicalBackgroundSection({
       <div className={styles.grid2}>
         <div className={styles.field}>
           <label className={styles.label} htmlFor="programmingExperience">
-            <span>
-              {isAr ? "من إمتى وانت بتتعلم برمجة؟" : "Programming Experience"}
-            </span>
+            <span>{isAr ? "من إمتى وانت بتتعلم برمجة؟" : "Programming Experience"}</span>
             <span className={styles.requiredMark}>*</span>
           </label>
           <input

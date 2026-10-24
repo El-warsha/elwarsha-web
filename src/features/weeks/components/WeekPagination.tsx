@@ -9,7 +9,12 @@ export interface WeekPaginationProps {
   copy: (typeof messages)[Locale];
 }
 
-export function WeekPagination({ cohortSlug, weekNum, locale, copy }: WeekPaginationProps) {
+export function WeekPagination({
+  cohortSlug,
+  weekNum,
+  locale,
+  copy,
+}: WeekPaginationProps) {
   const prevWeekNum = weekNum > 1 ? weekNum - 1 : null;
   const nextWeekNum = weekNum < 8 ? weekNum + 1 : null;
 
@@ -37,7 +42,7 @@ export function WeekPagination({ cohortSlug, weekNum, locale, copy }: WeekPagina
           <span>
             {copy.portal.nextWeek} ({nextWeekNum})
           </span>
-          <span aria-hidden="true">{locale === "ar" ? "→" : "←"}</span>
+          <span aria-hidden="true">{locale === "ar" ? "←" : "→"}</span>
         </Link>
       ) : (
         <span className={styles.navButtonDisabled} />

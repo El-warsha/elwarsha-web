@@ -7,6 +7,7 @@ Use TanStack React Query (`@tanstack/react-query`) for all asynchronous server s
 Raw `useEffect` + `useState` data fetching patterns are prohibited for server interactions.
 
 Rules:
+
 1. **Encapsulation in custom hooks**: Components must never invoke `useQuery` or `useMutation` directly with raw strings. Every query or mutation must live in a dedicated hook inside its feature folder (e.g. `src/features/weeks/useWeeks.ts`, `useWeekDetail.ts`).
 2. **Hierarchical query keys**: Query keys must follow a consistent array structure: `['cohort', cohortSlug, 'weeks', locale]`.
 3. **Zod integration in `queryFn`**: The query fetcher invokes the API client and parses the response through the feature's Zod schema before returning data to the hook.
@@ -15,6 +16,7 @@ Rules:
 ## Why
 
 Hand-rolled `useEffect` data fetching suffers from well-documented pitfalls:
+
 - **Race conditions**: Fast user navigation and route changes cause out-of-order response resolutions.
 - **Waterfalls & redundant traffic**: Parallel components requesting the same endpoint trigger duplicate network requests.
 - **Boilerplate state management**: Manually coordinating `isLoading`, `error`, `data`, and retry flags produces repetitive, fragile boilerplate.
