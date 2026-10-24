@@ -5,7 +5,7 @@ import { isLocale, type Locale } from "./locales.js";
 const STORAGE_KEY = "elwarsha.locale";
 
 function readStoredLocale(): Locale | null {
-  if (typeof window === "undefined") {
+  if (typeof window === "undefined" || !window.localStorage) {
     return null;
   }
   const stored = window.localStorage.getItem(STORAGE_KEY) ?? undefined;
@@ -25,7 +25,7 @@ export const useLocaleStore = create<{
 }>((set) => ({
   locale: readStoredLocale() ?? browserLocale(),
   setLocale: (locale) => {
-    window.localStorage.setItem(STORAGE_KEY, locale);
+    window.localStorage?.setItem(STORAGE_KEY, locale);
     set({ locale });
   },
 }));
