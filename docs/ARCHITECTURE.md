@@ -17,3 +17,9 @@ client.
 
 Participant portal v1 (screens, status, week content, GitHub listening) is
 specified in [`product/PORTAL.md`](product/PORTAL.md).
+
+## Deployment and CD
+
+The frontend is hosted on edge static infrastructure (Vercel) with automatic continuous deployment on git push.
+
+Static routing is governed by `vercel.json` with a catch-all rewrite (`/(.*) -> /index.html`). Pre-rendered marketing and curriculum pages are served directly as static HTML assets, while dynamic portal routes (`/:locale/portal/*`) fall back to the SPA shell for client-side routing.
