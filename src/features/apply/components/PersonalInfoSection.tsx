@@ -5,7 +5,9 @@ import styles from "../CohortApplicationForm.module.css";
 export interface PersonalInfoSectionProps {
   formData: ApplyCohortInput;
   fieldErrors: Record<string, string>;
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => void;
   isAr: boolean;
 }
 
@@ -123,9 +125,7 @@ export function PersonalInfoSection({
             value={formData.githubHandle}
             onChange={handleChange}
             aria-invalid={Boolean(fieldErrors.githubHandle)}
-            aria-describedby={
-              fieldErrors.githubHandle ? "githubHandle-error" : undefined
-            }
+            aria-describedby={fieldErrors.githubHandle ? "githubHandle-error" : undefined}
           />
           {fieldErrors.githubHandle && (
             <span id="githubHandle-error" role="alert" className={styles.errorText}>
@@ -150,9 +150,7 @@ export function PersonalInfoSection({
           value={formData.discordHandle}
           onChange={handleChange}
           aria-invalid={Boolean(fieldErrors.discordHandle)}
-          aria-describedby={
-            fieldErrors.discordHandle ? "discordHandle-error" : undefined
-          }
+          aria-describedby={fieldErrors.discordHandle ? "discordHandle-error" : undefined}
         />
         {fieldErrors.discordHandle && (
           <span id="discordHandle-error" role="alert" className={styles.errorText}>

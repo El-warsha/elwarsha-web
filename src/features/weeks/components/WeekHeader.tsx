@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import { marked } from "marked";
 import type { messages, Locale } from "@core/i18n";
 import { Badge } from "@ui/components/Badge/Badge";
 import type { Week } from "../weeks.schema.js";
@@ -23,6 +25,11 @@ export function WeekHeader({ week, copy }: WeekHeaderProps) {
       : isActive
         ? styles.pillActive
         : styles.pill;
+
+  const bigIdeaHtml = useMemo(() => {
+    if (!week.bigIdea) return "";
+    return marked.parse(week.bigIdea, { async: false }) as string;
+  }, [week.bigIdea]);
 
   return (
     <>
@@ -56,7 +63,10 @@ export function WeekHeader({ week, copy }: WeekHeaderProps) {
         {week.bigIdea && (
           <div className={styles.bigIdeaBox}>
             <strong>{copy.portal.bigIdea}</strong>
-            <p>{week.bigIdea}</p>
+            <div
+              className={styles.bigIdeaContent}
+              dangerouslySetInnerHTML={{ __html: bigIdeaHtml }}
+            />
           </div>
         )}
       </section>

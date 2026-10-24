@@ -95,9 +95,7 @@ describe("WeekDetailPage", () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText(/How does a request travel/)).toBeInTheDocument();
-    expect(
-      screen.getByText(/Trace a complete vertical slice/),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Trace a complete vertical slice/)).toBeInTheDocument();
     expect(
       screen.getByText("Trace a request from HTTP entry to module"),
     ).toBeInTheDocument();
@@ -113,6 +111,31 @@ describe("WeekDetailPage", () => {
 
     const nextWeekLink = screen.getByRole("link", { name: /Next Week \(2\)/i });
     expect(nextWeekLink).toHaveAttribute("href", "/en/portal/cohorts/cohort-01/weeks/2");
+    expect(nextWeekLink).toHaveTextContent("→");
+  });
+
+  it("renders markdown formatting inside bigIdea correctly", async () => {
+    vi.mocked(api.getCohortWeek).mockResolvedValue({
+      ...sampleWeek,
+      bigIdea:
+        "This is **important idea** with `code token`.\n\n1. First point\n2. Second point",
+    });
+
+    renderWithQueryClient(
+      <MemoryRouter initialEntries={["/en/portal/cohorts/cohort-01/weeks/1"]}>
+        <Routes>
+          <Route
+            path="/:locale/portal/cohorts/:cohortSlug/weeks/:weekNumber"
+            element={<WeekDetailPage locale="en" />}
+          />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const boldText = await screen.findByText("important idea");
+    expect(boldText.tagName.toLowerCase()).toBe("strong");
+    expect(screen.getByText("code token").tagName.toLowerCase()).toBe("code");
+    expect(screen.getByText("First point")).toBeInTheDocument();
   });
 
   it("renders not found state when week query fails", async () => {

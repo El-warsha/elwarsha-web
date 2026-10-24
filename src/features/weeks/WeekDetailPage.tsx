@@ -80,10 +80,7 @@ export function WeekDetailPage({ locale }: { locale: Locale }) {
 
       <WeekHeader week={week} copy={copy} />
 
-      <WeekOutcomesList
-        outcomes={week.outcomes}
-        title={copy.portal.learningOutcomes}
-      />
+      <WeekOutcomesList outcomes={week.outcomes} title={copy.portal.learningOutcomes} />
 
       <WeekConceptsGrid
         coreConcepts={week.coreConcepts}
@@ -95,9 +92,7 @@ export function WeekDetailPage({ locale }: { locale: Locale }) {
         title={copy.portal.appliedThroughTheStack}
       />
 
-      {week.assignment && (
-        <WeekAssignmentCard assignment={week.assignment} copy={copy} />
-      )}
+      {week.assignment && <WeekAssignmentCard assignment={week.assignment} copy={copy} />}
 
       <WeekResourcesSection resources={week.resources} copy={copy} />
 

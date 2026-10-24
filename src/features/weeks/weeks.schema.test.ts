@@ -71,8 +71,6 @@ describe("weeks.schema", () => {
   });
 
   it("fails parsing if status is not an allowed enum", () => {
-    expect(() =>
-      weekSchema.parse({ ...validWeek, status: "unknown" }),
-    ).toThrow();
+    expect(() => weekSchema.parse({ ...validWeek, status: "unknown" })).toThrow();
   });
 });

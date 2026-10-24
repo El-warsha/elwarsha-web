@@ -74,11 +74,7 @@ export function CohortApplicationForm({
       />
 
       <div className={styles.actionsBar}>
-        <button
-          type="submit"
-          className={styles.submitBtn}
-          disabled={isSubmitting}
-        >
+        <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
           {isSubmitting
             ? isAr
               ? "جاري إرسال الطلب..."
