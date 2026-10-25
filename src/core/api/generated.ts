@@ -10,4 +10,10 @@ export {
   type Product,
   type SessionResponse,
   type SessionUser,
+  type CohortRef,
+  type Week,
+  type WeekResourceItem,
+  type WeekResources,
+  type WeekAppliedLayer,
+  type WeekAssignment,
 } from "@elwarsha/api-client";
