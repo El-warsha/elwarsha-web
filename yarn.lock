@@ -284,8 +284,8 @@ __metadata:
 
 "@elwarsha/api-client@file:vendor/api-client::locator=elwarsha-web%40workspace%3A.":
   version: 0.1.0
-  resolution: "@elwarsha/api-client@file:vendor/api-client#vendor/api-client::hash=10d332&locator=elwarsha-web%40workspace%3A."
-  checksum: 10c0/a21bc4b8d930ca50388a8424063b59732e8a796fad4f59568dd2003c211ad1334a972b1221540e4254b2788274dc3cfece793b427f740ae52cce28a172533715
+  resolution: "@elwarsha/api-client@file:vendor/api-client#vendor/api-client::hash=617bc4&locator=elwarsha-web%40workspace%3A."
+  checksum: 10c0/b2d13f0296b45bae2f491835441831cb20e0b3a5101c942af9021eafbeff3ae3736a75b142fddfd032d612a538a52ba24cc2126ee489d6f3f7ca8f47367dfba6
   languageName: node
   linkType: hard
 
@@ -2556,6 +2556,7 @@ __metadata:
     typescript-eslint: "npm:^8.44.1"
     vite: "npm:^6.3.5"
     vitest: "npm:^3.2.4"
+    yarn: "npm:^1.22.22"
     zod: "npm:^4.1.11"
     zustand: "npm:^5.0.8"
   languageName: unknown
@@ -5991,6 +5992,16 @@ __metadata:
   version: 5.0.0
   resolution: "yallist@npm:5.0.0"
   checksum: 10c0/a499c81ce6d4a1d260d4ea0f6d49ab4da09681e32c3f0472dee16667ed69d01dae63a3b81745a24bd78476ec4fcf856114cb4896ace738e01da34b2c42235416
+  languageName: node
+  linkType: hard
+
+"yarn@npm:^1.22.22":
+  version: 1.22.22
+  resolution: "yarn@npm:1.22.22"
+  bin:
+    yarn: bin/yarn.js
+    yarnpkg: bin/yarn.js
+  checksum: 10c0/8c77198c93d7542e7f4e131c63b66de357b7076ecfbcfe709ec0d674115c2dd9edaa45196e5510e6e9366d368707a802579e3402071002e1c9d9a99d491478de
   languageName: node
   linkType: hard
 
