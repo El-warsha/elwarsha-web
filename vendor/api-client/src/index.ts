@@ -51,8 +51,14 @@ export type Engagement = {
   product: Product;
 };
 
+export type Label = {
+  id: string;
+  name: string;
+};
+
 export type Assignment = {
   id: string;
+  labels: Label[];
   weekNumber: number;
   title: string;
   status: "draft" | "published" | "closed";
