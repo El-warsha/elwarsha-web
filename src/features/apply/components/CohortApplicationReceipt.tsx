@@ -7,7 +7,10 @@ export interface CohortApplicationReceiptProps {
   locale: Locale;
 }
 
-export function CohortApplicationReceipt({ receipt, locale }: CohortApplicationReceiptProps) {
+export function CohortApplicationReceipt({
+  receipt,
+  locale,
+}: CohortApplicationReceiptProps) {
   const isAr = locale === "ar";
 
   return (

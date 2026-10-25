@@ -5,7 +5,9 @@ import styles from "../CohortApplicationForm.module.css";
 export interface MotivationSectionProps {
   formData: ApplyCohortInput;
   fieldErrors: Record<string, string>;
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => void;
   isAr: boolean;
 }
 
@@ -20,9 +22,7 @@ export function MotivationSection({
       <legend className={styles.legend}>
         <span className={styles.legendBadge}>04</span>
         <span>
-          {isAr
-            ? "القسم الرابع: الدافع والالتزام"
-            : "Section 4: Motivation & Commitment"}
+          {isAr ? "القسم الرابع: الدافع والالتزام" : "Section 4: Motivation & Commitment"}
         </span>
       </legend>
       <p className={styles.sectionHint}>

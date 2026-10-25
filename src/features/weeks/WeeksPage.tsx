@@ -23,7 +23,7 @@ import styles from "./WeeksPage.module.css";
  */
 export function WeeksPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
-  const { cohortSlug = "cohort-01" } = useParams();
+  const { cohortSlug: _cohortSlug = "cohort-01" } = useParams();
 
   return (
     <div className={styles.page}>
@@ -77,7 +77,9 @@ export function WeeksPage({ locale }: { locale: Locale }) {
             border: "1px solid var(--color-border-default)",
           }}
         >
-          <h3 style={{ margin: "0 0 var(--space-2)", fontSize: "0.95rem", fontWeight: 700 }}>
+          <h3
+            style={{ margin: "0 0 var(--space-2)", fontSize: "0.95rem", fontWeight: 700 }}
+          >
             {locale === "ar" ? "قائمة متطلبات المهمة:" : "Assignment Checklist:"}
           </h3>
           <ul
@@ -88,12 +90,25 @@ export function WeeksPage({ locale }: { locale: Locale }) {
               fontSize: "0.9rem",
             }}
           >
-            <li>Migrate DB in <code>elwarsha-api</code> (add <code>currentWeekNumber</code>)</li>
-            <li>Implement <code>useCohortWeeks(cohortSlug, locale)</code> in <code>useCohortWeeks.ts</code></li>
-            <li>Create <code>CohortHeaderBar.tsx</code> (1 component per file)</li>
-            <li>Create <code>WeekCard.tsx</code> and <code>LockedWeekCard.tsx</code></li>
-            <li>Render the cards grid here in <code>WeeksPage.tsx</code></li>
-            <li>Add unit tests in <code>WeeksPage.test.tsx</code></li>
+            <li>
+              Migrate DB in <code>elwarsha-api</code> (add <code>currentWeekNumber</code>)
+            </li>
+            <li>
+              Implement <code>useCohortWeeks(cohortSlug, locale)</code> in{" "}
+              <code>useCohortWeeks.ts</code>
+            </li>
+            <li>
+              Create <code>CohortHeaderBar.tsx</code> (1 component per file)
+            </li>
+            <li>
+              Create <code>WeekCard.tsx</code> and <code>LockedWeekCard.tsx</code>
+            </li>
+            <li>
+              Render the cards grid here in <code>WeeksPage.tsx</code>
+            </li>
+            <li>
+              Add unit tests in <code>WeeksPage.test.tsx</code>
+            </li>
           </ul>
         </div>
       </section>

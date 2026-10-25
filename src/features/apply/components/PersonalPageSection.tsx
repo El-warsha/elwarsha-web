@@ -5,7 +5,9 @@ import styles from "../CohortApplicationForm.module.css";
 export interface PersonalPageSectionProps {
   formData: ApplyCohortInput;
   fieldErrors: Record<string, string>;
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => void;
   isAr: boolean;
 }
 
