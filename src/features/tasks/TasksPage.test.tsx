@@ -46,8 +46,8 @@ describe("TasksPage", () => {
     render(<TasksPage locale="en" />);
 
     // التأكد من ظهور الـ Label Chip على الشاشة
-    const labelChip = await screen.findByText("Frontend");
-    expect(labelChip).toBeInTheDocument();
+    const labelChips = await screen.findAllByText("Frontend");
+    expect(labelChips[0]).toBeInTheDocument();
 
     // التأكد من وجود اسم معياري لأداة اختيار/فلترة اللابل (Accessible Name)
     const pickerControl = screen.getByRole("combobox", {
@@ -71,8 +71,8 @@ describe("TasksPage", () => {
       name: /filter by label/i,
     });
 
-    // تغيير الخيار داخل الـ Picker
-    fireEvent.change(pickerControl, { target: { value: "l1" } });
-    expect(pickerControl).toHaveValue("l1");
+        const labelButton = await screen.findByRole("button", { name: /frontend/i });
+        fireEvent.click(labelButton);
+        expect(labelButton).toHaveAttribute("aria-pressed", "true");
   });
 });

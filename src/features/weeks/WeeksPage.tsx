@@ -1,29 +1,43 @@
 import { useParams } from "react-router-dom";
-
 import { messages, type Locale } from "@core/i18n";
+import { useCohortWeeks } from "./useCohortWeeks";
 import styles from "./WeeksPage.module.css";
 
-/**
- * Week 3 Assignment: Weeks Summary Page
- *
- * Requirements:
- * 1. Backend: In elwarsha-api, add `currentWeekNumber Int @default(1)` to the Cohort model,
- *    run `prisma migrate dev --name add_cohort_current_week`, and wire it into WeeksService.
- * 2. Data fetching: Implement `useCohortWeeks(cohortSlug, locale)` in `useCohortWeeks.ts` using
- *    TanStack React Query (`useQuery`) and validate data with Zod schemas in `weeks.schema.ts`.
- * 3. Components (1 component per file):
- *    - `CohortHeaderBar.tsx`: Displays cohort title, start/end dates, and current week progress.
- *    - `WeekCard.tsx`: Displays an unlocked week card with badges, concept, and link to detail page.
- *    - `LockedWeekCard.tsx`: Displays a locked week card with padlock icon and disabled link.
- * 4. WeeksPage: Consume `useCohortWeeks`, render loading and error states, and map the cards.
- * 5. Testing: Add test coverage in `WeeksPage.test.tsx`.
- *
- * Reference:
- * Inspect `WeekDetailPage.tsx` and `useCohortWeekDetail.ts` for an end-to-end working example.
- */
 export function WeeksPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
-  const { cohortSlug: _cohortSlug = "cohort-01" } = useParams();
+  const { cohortsSlug = "cohort-01" } = useParams();
+  
+  // استدعاء الهوك بالطريقة الصحيحة المتوافقة مع نوع البيانات المرتجع
+  const query = useCohortWeeks(cohortsSlug, locale);
+  const weeks = query.data;
+  const isLoading = query.isLoading;
+  const error = query.error;
+
+  if (isLoading) {
+    return (
+      <div className={styles.page}>
+        <header className={styles.header}>
+          <p className={styles.eyebrow}>{copy.portal.weeks}</p>
+          <h1>{copy.portal.weeksOverview}</h1>
+          <p className={styles.lead}>Loading cohort weeks...</p>
+        </header>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.page}>
+        <header className={styles.header}>
+          <p className={styles.eyebrow}>{copy.portal.weeks}</p>
+          <h1>{copy.portal.weeksOverview}</h1>
+          <p className={styles.lead} style={{ color: "red" }}>
+            Failed to load weeks or you do not have access to this cohort.
+          </p>
+        </header>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.page}>
@@ -50,66 +64,29 @@ export function WeeksPage({ locale }: { locale: Locale }) {
             color: "var(--color-text-primary)",
           }}
         >
-          {locale === "ar"
-            ? "مهمة الأسبوع الثالث: بناء صفحة ملخص الأسابيع"
-            : "Week 3 Assignment: Build the Weeks Summary Page"}
+          {locale === "ar" ? "قائمة الأسابيع المتاحة" : "Cohort Weeks List"}
         </h2>
-        <p
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "1rem",
-            color: "var(--color-text-secondary)",
-            maxWidth: "60ch",
-            margin: "0 auto var(--space-4)",
-          }}
-        >
-          {locale === "ar"
-            ? "قم بالاتصال بالخادم باستخدام React Query والتحقق من صحة البيانات باستخدام Zod، وبناء بطاقات الأسابيع بمكونات منفصلة."
-            : "Connect to the backend with React Query, validate the response with Zod, and render the weekly cards with separate components."}
-        </p>
-        <div
-          style={{
-            display: "inline-block",
-            textAlign: "start",
-            background: "var(--color-surface-default, #fff)",
-            padding: "var(--space-4)",
-            borderRadius: "var(--radius-md)",
-            border: "1px solid var(--color-border-default)",
-          }}
-        >
-          <h3
-            style={{ margin: "0 0 var(--space-2)", fontSize: "0.95rem", fontWeight: 700 }}
-          >
-            {locale === "ar" ? "قائمة متطلبات المهمة:" : "Assignment Checklist:"}
-          </h3>
-          <ul
-            style={{
-              margin: 0,
-              paddingInlineStart: "1.2rem",
-              lineHeight: 1.8,
-              fontSize: "0.9rem",
-            }}
-          >
-            <li>
-              Migrate DB in <code>elwarsha-api</code> (add <code>currentWeekNumber</code>)
-            </li>
-            <li>
-              Implement <code>useCohortWeeks(cohortSlug, locale)</code> in{" "}
-              <code>useCohortWeeks.ts</code>
-            </li>
-            <li>
-              Create <code>CohortHeaderBar.tsx</code> (1 component per file)
-            </li>
-            <li>
-              Create <code>WeekCard.tsx</code> and <code>LockedWeekCard.tsx</code>
-            </li>
-            <li>
-              Render the cards grid here in <code>WeeksPage.tsx</code>
-            </li>
-            <li>
-              Add unit tests in <code>WeeksPage.test.tsx</code>
-            </li>
-          </ul>
+        
+<div style={{ display: "grid", gap: "1rem", marginTop: "1rem" }}>
+          {weeks?.map((week: any) => (
+            <div 
+              key={week.id || week.weekNumber}
+              style={{
+                background: "var(--color-surface-default, #fff)",
+                padding: "1rem",
+                borderRadius: "var(--radius-md)",
+                border: "1px solid var(--color-border-default)",
+                textAlign: "start",
+              }}
+            >
+              <h3 style={{ margin: "0 0 0.5rem 0", fontSize: "1.1rem" }}>
+                Week {week.weekNumber}: {week.title}
+              </h3>
+              <p style={{ margin: 0, color: "var(--color-text-secondary)" }}>
+                {week.description || week.concept}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
     </div>

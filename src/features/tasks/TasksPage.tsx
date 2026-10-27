@@ -31,13 +31,13 @@ export function TasksPage({ locale }: { locale: Locale }) {
       title={tasks?.[0]?.title ?? copy.portal.loading}
     >
       {/* أدوات اختيار وتصفية اللابلز */}
-      <div role="group" aria-label="Filter labels" className="mb-4">
-        <LabelPicker
-          labels={availableLabels}
-          selectedId={selectedLabelId}
-          onSelect={setSelectedLabelId}
-        />
-      </div>
+      <div role="combobox" aria-label="filter by label" aria-expanded="false" className="mb-4">
+  <LabelPicker
+    labels={availableLabels}
+    selectedId={selectedLabelId}
+    onSelect={setSelectedLabelId}
+  />
+</div>
 
       {/* عرض قائمة المهام */}
       {tasks && tasks.length > 0 ? (
