@@ -9,3 +9,8 @@ export const api = createElWarshaClient({
   baseUrl: baseUrl ?? "http://localhost:3001",
 });
 export { ElWarshaApiError } from "@elwarsha/api-client";
+export type {
+  ApplyCohortInput,
+  CohortApplicationResponse,
+  ApiError,
+} from "@elwarsha/api-client";
