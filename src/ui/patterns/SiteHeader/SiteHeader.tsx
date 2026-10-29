@@ -1,9 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { messages, type Locale } from "@core/i18n";
 import { Badge } from "@ui/components/Badge/Badge";
 
 import styles from "./SiteHeader.module.css";
+import { useSession } from "@core/session";
+import { api } from "@core/api";
 
 export function SiteHeader({
   locale,
@@ -14,8 +16,16 @@ export function SiteHeader({
 }) {
   const copy = messages[locale];
   const prefix = `/${locale}`;
+  const session = useSession();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await session.logout();
+    navigate(`/${locale}/`, { replace: true });
+  };
 
   return (
+    
     <header className={styles.header}>
       <NavLink className={styles.brand} to={`${prefix}/`}>
         <span className={styles.mark} aria-hidden="true">
@@ -36,6 +46,26 @@ export function SiteHeader({
         <button className={styles.lang} type="button" onClick={onToggleLocale}>
           <Badge>{copy.language}</Badge>
         </button>
+        
+        {session.status === "unauthenticated" && (
+          <a
+            className={styles.applyBtn}
+            href={api.loginUrl({ locale })}
+          >
+            {copy.portal.logIn}
+          </a>
+        )}
+        {session.status === "authenticated" && (
+          <button
+              className={styles.lang}
+              type="button"
+              onClick={handleSignOut}
+              aria-label={copy.portal.signOut}
+              
+          >
+          <Badge>{copy.portal.signOut}</Badge>
+          </button>
+        )}
         <NavLink className={styles.applyBtn} to={`${prefix}/apply/`}>
           {copy.nav.apply}
         </NavLink>
