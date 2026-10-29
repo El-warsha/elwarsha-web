@@ -1,18 +1,23 @@
+import { QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { queryClient } from "../core/query/client.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { LocaleHome } from "./LocaleHome.js";
 import { PublicLayout } from "./PublicLayout.js";
 import { RootRedirect } from "./RootRedirect.js";
 import { RoutedPage } from "./RoutedPage.js";
 import { portalRoutes, publicRoutes } from "./routes/registry.js";
+import { ProtectedRoute } from "./routes/ProtectedRoute.js";
 
 export function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </QueryClientProvider>
     </ErrorBoundary>
   );
 }
@@ -32,13 +37,15 @@ export function AppRoutes() {
               element={<RoutedPage route={route} />}
             />
           ))}
-        {portalRoutes.map((route) => (
-          <Route
-            key={route.id}
-            path={route.path}
-            element={<RoutedPage route={route} />}
-          />
-        ))}
+          <Route element={<ProtectedRoute />}>
+          {portalRoutes.map((route) => (
+              <Route
+                key={route.id}
+                path={route.path}
+                element={<RoutedPage route={route} />}
+              />
+            ))}
+            </Route>
       </Route>
     </Routes>
   );

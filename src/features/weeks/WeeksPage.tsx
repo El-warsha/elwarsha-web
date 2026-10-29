@@ -7,6 +7,7 @@ import { useCohortWeeks } from "./useCohortWeeks";
 import { WeekCard } from "./components/weekCard/WeekCard";
 import { LockedWeekCard } from "./components/weekCard/lockedWeekCard";
 import { StatePanel } from "@ui/patterns/StatePanel/StatePanel";
+import { DeniedPage } from "@ui/patterns/Denided/DeniedPage";
 
 /**
  * Week 3 Assignment: Weeks Summary Page
@@ -26,7 +27,7 @@ import { StatePanel } from "@ui/patterns/StatePanel/StatePanel";
 export function WeeksPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
   const { cohortSlug = "cohort-01" } = useParams();
-  const { data: weeks, isLoading, isError } = useCohortWeeks(cohortSlug, locale);
+  const { data: weeks, isLoading, isError, error } = useCohortWeeks(cohortSlug, locale);
   const cohort = weeks?.[0]?.cohort;
 
   if (isLoading) {
@@ -45,6 +46,12 @@ export function WeeksPage({ locale }: { locale: Locale }) {
  }
 
  if (isError || !weeks) {
+  const status = (error as { status?: number } | null)?.status;
+
+  if (status === 403) {
+    return <DeniedPage />;
+  }
+
   return (
     <main className={styles.page}>
       <Link

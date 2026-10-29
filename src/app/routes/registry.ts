@@ -10,6 +10,7 @@ import { productsRoute } from "@features/products";
 import { reviewsRoute } from "@features/reviews";
 import { roadmapRoute } from "@features/roadmap";
 import { submissionsRoute } from "@features/submissions";
+import { cohortWeekDetailRoute, cohortWeeksRoute, weeksRoute } from "@features/weeks";
 
 export const publicRoutes = [
   homeRoute,
@@ -22,6 +23,9 @@ export const publicRoutes = [
 
 export const portalRoutes = [
   dashboardRoute,
+  weeksRoute,
+  cohortWeeksRoute,
+  cohortWeekDetailRoute,
   productsRoute,
   cohortsRoute,
   assignmentsRoute,

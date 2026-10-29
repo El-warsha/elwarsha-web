@@ -15,9 +15,14 @@ import { WeekReflectionSection } from "./components/WeekReflectionSection.js";
 import { WeekPagination } from "./components/WeekPagination.js";
 
 import styles from "./WeekDetailPage.module.css";
+import { DeniedPage } from "@ui/patterns/Denided/DeniedPage.js";
 
 export function WeekDetailPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
+  console.log("locale:", locale);
+console.log("messages:", messages);
+console.log("copy:", copy);
+console.log("copy.portal:", copy?.portal);
   const { cohortSlug = "cohort-01", weekNumber = "1" } = useParams();
   const weekNum = parseInt(weekNumber, 10);
 
@@ -37,6 +42,12 @@ export function WeekDetailPage({ locale }: { locale: Locale }) {
   }
 
   if (isError || !week) {
+  const status = (error as { status?: number } | null)?.status;
+
+  if (status === 403) {
+    return <DeniedPage />;
+  }    
+
     return (
       <main className={styles.page}>
         <Link
