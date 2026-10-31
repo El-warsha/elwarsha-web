@@ -138,6 +138,9 @@ export const messages = {
       submissions: "التسليمات",
       reviews: "المراجعات",
       signOut: "تسجيل الخروج",
+      accessDeniedTitle: "مش متاح",
+      accessDeniedBody:
+        "مش متاح ليك الوصول للصفحة دي"
     },
     apply: {
       eyebrow: "الدفعة القادمة / Cohort 02",
@@ -284,6 +287,9 @@ export const messages = {
       submissions: "Submissions",
       reviews: "Reviews",
       signOut: "Sign out",
+      accessDeniedTitle: "Access Denied",
+      accessDeniedBody:
+        "You don't have permission to access this content.",
     },
     apply: {
       eyebrow: "Upcoming Cohort / Cohort 02",
