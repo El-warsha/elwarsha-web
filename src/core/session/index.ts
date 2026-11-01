@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from "react";
 import { api } from "@core/api";
 import type {
   Capability,
@@ -7,90 +6,49 @@ import type {
   SessionResponse,
   SessionUser,
 } from "@core/api/generated";
+import { ElWarshaApiError } from "@elwarsha/api-client";
+import { useQuery } from "@tanstack/react-query";
 
-export type { Capability, Membership, MembershipRole, SessionResponse, SessionUser };
+export type {
+  Capability,
+  Membership,
+  MembershipRole,
+  SessionResponse,
+  SessionUser,
+};
+
 export type Session = SessionResponse;
 
 export type SessionState =
   | { status: "loading"; session: null; error: null }
   | { status: "authenticated"; session: Session; error: null }
   | { status: "unauthenticated"; session: null; error: null }
-  | { status: "error"; session: null; error: unknown };
+  | { status: "error"; session: null; error: ElWarshaApiError };
 
-export type UseSessionResult = SessionState & {
-  logout: () => Promise<void>;
-};
-
-let inFlightSessionPromise: Promise<SessionResponse> | null = null;
-let sessionCache: SessionResponse | null = null;
-
-export function clearSessionCache(): void {
-  inFlightSessionPromise = null;
-  sessionCache = null;
-}
-
-export function fetchSession(): Promise<SessionResponse> {
-  if (sessionCache) {
-    return Promise.resolve(sessionCache);
-  }
-  if (!inFlightSessionPromise) {
-    inFlightSessionPromise = api
-      .me()
-      .then((session) => {
-        sessionCache = session;
-        return session;
-      })
-      .finally(() => {
-        inFlightSessionPromise = null;
-      });
-  }
-  return inFlightSessionPromise;
-}
-
+export type UseSessionResult = SessionState;
 export function useSession(): UseSessionResult {
-  const [state, setState] = useState<SessionState>(() =>
-    sessionCache
-      ? { status: "authenticated", session: sessionCache, error: null }
-      : { status: "loading", session: null, error: null },
-  );
+  const { data, error, isError, isPending } =
+    useQuery<SessionResponse, ElWarshaApiError>({
+      queryKey: ["session"],
+      queryFn: () => api.me(),
+    });
 
-  useEffect(() => {
-    let cancelled = false;
+  if (isPending) {
+    return { status: "loading", session: null, error: null };
+  }
 
-    fetchSession()
-      .then((session) => {
-        if (!cancelled) {
-          setState({ status: "authenticated", session, error: null });
-        }
-      })
-      .catch((err: unknown) => {
-        if (!cancelled) {
-          sessionCache = null;
-          const status = (err as { status?: number })?.status;
-          if (status === 401) {
-            setState({ status: "unauthenticated", session: null, error: null });
-          } else {
-            setState({ status: "error", session: null, error: err });
-          }
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const logout = useCallback(async () => {
-    try {
-      await api.logout();
-    } finally {
-      clearSessionCache();
-      setState({ status: "unauthenticated", session: null, error: null });
+  // Check errors before cached data
+  if (isError) {
+    if (error.status === 401) {
+      return { status: "unauthenticated", session: null, error: null };
     }
-  }, []);
 
-  return {
-    ...state,
-    logout,
-  };
+    return { status: "error", session: null, error };
+  }
+
+  if (data) {
+    return { status: "authenticated", session: data, error: null };
+  }
+
+  return { status: "loading", session: null, error: null };
 }

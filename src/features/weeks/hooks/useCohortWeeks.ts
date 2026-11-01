@@ -20,7 +20,7 @@ export function useCohortWeeks(
   _options?: { enabled?: boolean },
 ) {
   return useQuery<Week[]>({
-    queryKey: ["cohorts", _cohortSlug, "weeks", { locale: _locale }],
+    queryKey: ["cohorts", _cohortSlug, "weeks", { locale: _locale }], 
 
     queryFn: async () => {
       // TODO (Week 3 Task): Fetch from api.listCohortWeeks and validate with Zod

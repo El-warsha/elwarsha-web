@@ -212,6 +212,7 @@ export function createElWarshaClient(options: ElWarshaClientOptions) {
     listProducts: () => request<Product[]>("/api/v1/products"),
     listEngagements: () => request<Engagement[]>("/api/v1/engagements"),
     listAssignments: () => request<Assignment[]>("/api/v1/assignments"),
+
     listCohortWeeks: (cohortSlug: string, params?: { locale?: Locale }) =>
       request<Week[]>(
         params?.locale

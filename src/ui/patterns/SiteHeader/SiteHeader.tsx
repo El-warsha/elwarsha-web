@@ -2,8 +2,13 @@ import { NavLink } from "react-router-dom";
 
 import { messages, type Locale } from "@core/i18n";
 import { Badge } from "@ui/components/Badge/Badge";
-
+import { useNavigate } from "react-router-dom";
 import styles from "./SiteHeader.module.css";
+import { useContext } from "react";
+import { SessionContext } from "@core/session/SessionContext";
+import { Button, ButtonLink } from "@ui/components/Button/Button";
+import { useLogout } from "@core/session/useLogout";
+import { api } from "@core/api";
 
 export function SiteHeader({
   locale,
@@ -14,7 +19,10 @@ export function SiteHeader({
 }) {
   const copy = messages[locale];
   const prefix = `/${locale}`;
-
+  const sessionState = useContext(SessionContext);
+  const logout = useLogout();
+  const navigate = useNavigate();
+  console.log(api.loginUrl({ locale }));
   return (
     <header className={styles.header}>
       <NavLink className={styles.brand} to={`${prefix}/`}>
@@ -39,6 +47,28 @@ export function SiteHeader({
         <NavLink className={styles.applyBtn} to={`${prefix}/apply/`}>
           {copy.nav.apply}
         </NavLink>
+        {sessionState?.status === "authenticated" ? (
+          <>
+            <span>{sessionState.session.user.displayName}</span>
+
+            <Button
+              type="button"
+              onClick={() =>
+                logout.mutate(undefined, {
+                  onSuccess: () => navigate(`/${locale}/`),
+                }
+              )
+              }
+            >
+              {copy.portal.signOut}
+            </Button>
+          </>
+        )
+        :
+                <ButtonLink href={api.loginUrl({ locale })}>{copy.portal.logIn}</ButtonLink>
+        
+      
+      }
       </div>
     </header>
   );

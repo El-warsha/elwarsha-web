@@ -8,12 +8,14 @@ import { PageSection } from "@ui/patterns/PageSection/PageSection";
 import { StatePanel } from "@ui/patterns/StatePanel/StatePanel";
 
 import styles from "./DashboardPage.module.css";
+import { useLogout } from "@core/session/useLogout";
 
 export function DashboardPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const sessionState = useSession();
+  const { mutate } = useLogout();
 
   if (sessionState.status === "loading") {
     return (
@@ -36,11 +38,12 @@ export function DashboardPage({ locale }: { locale: Locale }) {
             {copy.portal.assignments}
           </Link>
           <Button
-            variant="ghost"
-            onClick={async () => {
-              await sessionState.logout();
-              navigate(`/${locale}/`);
-            }}
+            type="button"
+            onClick={() =>
+              mutate(undefined, {
+                onSuccess: () => navigate(`/${locale}/`),
+              })
+            }
           >
             {copy.portal.signOut}
           </Button>

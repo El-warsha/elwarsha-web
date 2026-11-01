@@ -62,34 +62,33 @@ export function WeeksPage({ locale }: { locale: Locale }) {
           startDate={weeks[0].cohort.startsOn}
           endDate={weeks[0].cohort.endsOn}
         ></CohortHeaderBar>
-          <div className={styles.cardsContainer}>
-        {weeks?.map((week: Week) => {
-          if(week.isLocked){
-return <LockedWeekCard
-            key={week.title}
-            locale={locale}
-            // status={week.status}
-            title={week.title}
-            weekNumber={week.weekNumber}
-            concept={week.concept}
-          ></LockedWeekCard>}
-          if(week.status==='active'||week.status==='completed'){
-            return <WeekCard
-            key={week.title}
-            locale={locale}
-            status={week.status}
-            title={week.title}
-            weekNumber={week.weekNumber}
-            concept={week.concept}
-          ></WeekCard>}
-          
-        
-      
-      })
-      }
+        <div className={styles.cardsContainer}>
+          {weeks?.map((week: Week) => {
+            if (week.isLocked) {
+              return (
+                <LockedWeekCard
+                  key={week.title}
+                  locale={locale}
+                  title={week.title}
+                  weekNumber={week.weekNumber}
+                  concept={week.concept}
+                />
+              );
+            }
+            if (week.status === "active" || week.status === "completed") {
+              return (
+                <WeekCard
+                  key={week.title}
+                  locale={locale}
+                  status={week.status}
+                  title={week.title}
+                  weekNumber={week.weekNumber}
+                  concept={week.concept}
+                />
+              );
+            }
+          })}
         </div>
-
-   
       </section>
     </div>
   );
