@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import { messages, type Locale } from "@core/i18n";
 import { Badge } from "@ui/components/Badge/Badge";
 
+import { useSession } from "@core/session";
+
 import styles from "./SiteHeader.module.css";
 
 export function SiteHeader({
@@ -14,6 +16,20 @@ export function SiteHeader({
 }) {
   const copy = messages[locale];
   const prefix = `/${locale}`;
+  const { user, status, mutateSession } = useSession();
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/v1/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      await mutateSession();
+      window.location.href = `${prefix}/`;
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -36,6 +52,20 @@ export function SiteHeader({
         <button className={styles.lang} type="button" onClick={onToggleLocale}>
           <Badge>{copy.language}</Badge>
         </button>
+
+        {status === "authenticated" && user ? (
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontSize: "13px", fontWeight: 500 }}>{user.name}</span>
+            <button onClick={handleLogout} className={styles.applyBtn} type="button">
+              {locale === "ar" ? "خروج" : "Sign out"}
+            </button>
+          </div>
+        ) : (
+          <a href={`/api/v1/auth/login?locale=${locale}`} className={styles.applyBtn}>
+            {locale === "ar" ? "تسجيل الدخول" : "Sign in"}
+          </a>
+        )}
+
         <NavLink className={styles.applyBtn} to={`${prefix}/apply/`}>
           {copy.nav.apply}
         </NavLink>

@@ -1,6 +1,6 @@
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
-import { messages, type Locale } from "@core/i18n";
+import { isLocale, messages, type Locale } from "@core/i18n";
 import { api } from "@core/api";
 import { useSession } from "@core/session";
 import { Button, ButtonLink } from "@ui/components/Button/Button";
@@ -9,8 +9,11 @@ import { StatePanel } from "@ui/patterns/StatePanel/StatePanel";
 
 import styles from "./DashboardPage.module.css";
 
-export function DashboardPage({ locale }: { locale: Locale }) {
-  const copy = messages[locale];
+export function DashboardPage() {
+  const { locale } = useParams<{ locale: string }>();
+  const currentLocale: Locale = isLocale(locale) ? locale : "ar";
+  const copy = messages[currentLocale] || messages["ar"];
+  // const copy = messages[locale];
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const sessionState = useSession();

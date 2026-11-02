@@ -100,26 +100,57 @@
 //       </section>
 //     </div>
 //   );
-// } 
+// }
+
 
 import { useParams } from "react-router-dom";
-import { messages, type Locale } from "@core/i18n";
+import { isLocale, messages, type Locale } from "@core/i18n";
 import { useCohortWeeks } from "./useCohortWeeks.js";
 import { CohortHeaderBar } from "./components/CohortHeaderBar.js";
 import { WeekCard } from "./components/WeekCard.js";
 import { LockedWeekCard } from "./components/LockedWeekCard.js";
 import styles from "./WeeksPage.module.css";
 
-export function WeeksPage({ locale }: { locale: Locale }) {
-  const copy = messages[locale];
+export function WeeksPage() {
+  const { locale } = useParams<{ locale: string }>();
+  const currentLocale: Locale = isLocale(locale) ? locale : "ar";
+  const copy = messages[currentLocale] || messages["ar"];
   const { cohortSlug = "cohort-01" } = useParams();
-  const { data: weeks, isLoading, isError } = useCohortWeeks(cohortSlug, locale);
+  const { data: weeks, isLoading, error, isError } = useCohortWeeks(cohortSlug, locale);
 
   if (isLoading) {
     return <div className={styles.page}>Loading weeks...</div>;
   }
 
+  // ---  403 Forbidden (BOLA) ---
   if (isError || !weeks) {
+    // 403 Forbidden: User is not enrolled in the cohort (BOLA) !
+    const errStatus = (error as any)?.status || (error as any)?.response?.status;
+
+    if (errStatus === 403) {
+      return (
+        <main
+          role="alert"
+          aria-live="assertive"
+          className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center"
+        >
+          <h2 className="text-2xl font-bold text-red-600 mb-2">
+            {locale === "ar" ? "غير مصرح بالوصول (403)" : "Access Denied (403)"}
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-md">
+            {locale === "ar"
+              ? "أنت لست مسجلاً في هذا الكوهورت. يقتصر الوصول على الأعضاء المسجلين فقط."
+              : "You are not enrolled in this cohort. Access is restricted to enrolled members."}
+          </p>
+          <a
+            href={`/${locale}/`}
+            className="px-5 py-2.5 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 transition-colors font-medium"
+          >
+            {locale === "ar" ? "العودة للرئيسية" : "Back to Home"}
+          </a>
+        </main>
+      );
+    }
     return <div className={styles.page}>Error loading weeks.</div>;
   }
 
@@ -128,20 +159,23 @@ export function WeeksPage({ locale }: { locale: Locale }) {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <p className={styles.eyebrow}>{copy.portal.weeks}</p>
-        <h1>{copy.portal.weeksOverview}</h1>
-        <p className={styles.lead}>{copy.portal.weeksSubtitle}</p>
+        <p className={styles.eyebrow}>{copy.portal?.weeks}</p>
+        <h1>{copy.portal?.weeksOverview}</h1>
+        <p className={styles.lead}>{copy.portal?.weeksSubtitle}</p>
       </header>
 
       {cohort && <CohortHeaderBar Cohort={cohort} locale={locale} copy={copy} />}
 
-       <div className={styles.weeksGrid} style={{ marginTop: "2rem" }}>
+      <div className={styles.weeksGrid} style={{ marginTop: "2rem" }}>
         {weeks.map((week) => {
           const today = new Date().toISOString().split("T")[0];
           const isActive = today >= week.startDate && today <= week.endDate;
 
           return (
-            <div key={week.weekNumber} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+            <div
+              key={week.weekNumber}
+              style={{ display: "flex", flexDirection: "column", height: "100%" }}
+            >
               {week.isLocked ? (
                 <LockedWeekCard week={week} locale={locale} copy={copy} />
               ) : (
