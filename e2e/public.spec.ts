@@ -10,7 +10,9 @@ test("switches between Arabic and English public pages", async ({ page }) => {
   await expect(page).toHaveURL(/\/en\/roadmap\//);
   await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
   await page.goto("/en/portal/");
-  await expect(page.getByText(/intentionally incomplete/)).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Sign in to see this week" }),
+  ).toBeVisible();
 });
 
 test("serves crawlable localized HTML", async ({ request }) => {
