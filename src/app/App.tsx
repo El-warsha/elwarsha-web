@@ -1,5 +1,7 @@
+import { QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { queryClient } from "../core/query/client.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { LocaleHome } from "./LocaleHome.js";
 import { PublicLayout } from "./PublicLayout.js";
@@ -10,9 +12,11 @@ import { portalRoutes, publicRoutes } from "./routes/registry.js";
 export function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </QueryClientProvider>
     </ErrorBoundary>
   );
 }

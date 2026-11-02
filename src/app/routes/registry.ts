@@ -1,3 +1,4 @@
+import { applyRoute } from "@features/apply";
 import { assignmentsRoute } from "@features/tasks";
 import { cohortsRoute } from "@features/cohorts";
 import { faqRoute } from "@features/faq";
@@ -9,6 +10,7 @@ import { productsRoute } from "@features/products";
 import { reviewsRoute } from "@features/reviews";
 import { roadmapRoute } from "@features/roadmap";
 import { submissionsRoute } from "@features/submissions";
+import { cohortWeekDetailRoute, cohortWeeksRoute, weeksRoute } from "@features/weeks";
 
 export const publicRoutes = [
   homeRoute,
@@ -16,10 +18,14 @@ export const publicRoutes = [
   roadmapRoute,
   participationRoute,
   faqRoute,
+  applyRoute,
 ];
 
 export const portalRoutes = [
   dashboardRoute,
+  weeksRoute,
+  cohortWeeksRoute,
+  cohortWeekDetailRoute,
   productsRoute,
   cohortsRoute,
   assignmentsRoute,
