@@ -20,8 +20,9 @@ export type SessionState =
 export type UseSessionResult = SessionState & {
   logout: () => Promise<void>;
 };
-
+// save promise session on flight to avoid multiple requests
 let inFlightSessionPromise: Promise<SessionResponse> | null = null;
+// save user data from backend
 let sessionCache: SessionResponse | null = null;
 
 export function clearSessionCache(): void {
@@ -33,6 +34,7 @@ export function fetchSession(): Promise<SessionResponse> {
   if (sessionCache) {
     return Promise.resolve(sessionCache);
   }
+  // if there is already a request in flight, return that promise
   if (!inFlightSessionPromise) {
     inFlightSessionPromise = api
       .me()
@@ -53,17 +55,19 @@ export function useSession(): UseSessionResult {
       ? { status: "authenticated", session: sessionCache, error: null }
       : { status: "loading", session: null, error: null },
   );
-
+  // fetch session on mount
   useEffect(() => {
     let cancelled = false;
 
     fetchSession()
       .then((session) => {
+        // if the request was not cancelled, update the state to authenticated
         if (!cancelled) {
           setState({ status: "authenticated", session, error: null });
         }
       })
       .catch((err: unknown) => {
+        // if the request was not cancelled, update the state to error
         if (!cancelled) {
           sessionCache = null;
           const status = (err as { status?: number })?.status;
@@ -79,7 +83,7 @@ export function useSession(): UseSessionResult {
       cancelled = true;
     };
   }, []);
-
+  //stay keep refrence to the logout function to avoid re-rendering
   const logout = useCallback(async () => {
     try {
       await api.logout();

@@ -2,12 +2,14 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { queryClient } from "../core/query/client.js";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { LocaleHome } from "./LocaleHome.js";
 import { PublicLayout } from "./PublicLayout.js";
 import { RootRedirect } from "./RootRedirect.js";
 import { RoutedPage } from "./RoutedPage.js";
 import { portalRoutes, publicRoutes } from "./routes/registry.js";
+import { ProtectedRoute } from "./ProtectedRoute.js";
 
 export function App() {
   return (
@@ -16,6 +18,7 @@ export function App() {
         <BrowserRouter>
           <AppRoutes />
         </BrowserRouter>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </ErrorBoundary>
   );
@@ -40,7 +43,11 @@ export function AppRoutes() {
           <Route
             key={route.id}
             path={route.path}
-            element={<RoutedPage route={route} />}
+            element={
+              <ProtectedRoute route={route}>
+                <RoutedPage route={route} />
+              </ProtectedRoute>
+            }
           />
         ))}
       </Route>

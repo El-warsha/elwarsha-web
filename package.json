@@ -24,6 +24,7 @@
   "dependencies": {
     "@elwarsha/api-client": "file:vendor/api-client",
     "@tanstack/react-query": "^5.104.3",
+    "@tanstack/react-query-devtools": "^5.105.0",
     "marked": "^18.1.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
