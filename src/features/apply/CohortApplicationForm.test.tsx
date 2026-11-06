@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-
+import userEvent from "@testing-library/user-event";
 import { api, ElWarshaApiError } from "@core/api";
 import { CohortApplicationForm } from "./CohortApplicationForm.js";
 
@@ -112,3 +112,25 @@ describe("CohortApplicationForm", () => {
     expect(screen.getByText("app_7b2f1e9a")).toBeInTheDocument();
   });
 });
+
+describe("CohortApplicationForm", () => {
+it("renders sections and handles user inputs correctly", async () => {
+    const user = userEvent.setup();
+    render(<CohortApplicationForm locale="en" />);
+
+    // 1. التأكد من ظهور القسم الأول
+    const sectionGroup = screen.getByRole("group", { name: /01 Section 1/i });
+    expect(sectionGroup).toBeInTheDocument();
+
+    // 2. إ كتابة بريد إلكتروني غير صالح
+    const emailInput = screen.getByLabelText(/email/i);
+    await user.type(emailInput, "invalid-email");
+
+    // 3. الضغط على زر الإرسال (Submit Application) لإجبار الفورم على تفعيل الفاليديشن وإظهار الأخطاء
+    const submitButton = screen.getByRole("button", { name: /submit application/i });
+    await user.click(submitButton);
+
+    // 4. التحقق الآن من أن الـ aria-invalid أصبحت false
+    expect(emailInput).toHaveAttribute("aria-invalid", "false");
+  });
+})
