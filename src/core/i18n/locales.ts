@@ -140,16 +140,12 @@ export const messages = {
       signOut: "تسجيل الخروج",
     },
     auth: {
-  loading: "بنتأكد من تسجيل الدخول…",
   error: "تعذّر التحقق من الجلسة. حدّث الصفحة.",
-  signedOutTitle: "سجّل الدخول للمتابعة",
   signedOutBody: "الصفحة دي للمشاركين المسجّلين فقط.",
-  signIn: "تسجيل الدخول",
-  signOut: "تسجيل الخروج",
   deniedTitle: "مفيش صلاحية للوصول",
   deniedBody: "حسابك مش مسجّل في الدفعة دي.",
   backHome: "الرجوع للرئيسية",
-   },
+},
     apply: {
       eyebrow: "الدفعة القادمة / Cohort 02",
       title: "استمارة التقديم — الدفعة الثانية",
@@ -297,7 +293,6 @@ export const messages = {
       signOut: "Sign out",
     },
     auth: {
-  loading: "Checking your session…",
   error: "Could not verify your session. Please reload.",
   signedOutTitle: "Sign in to continue",
   signedOutBody: "This page is for registered participants only.",

@@ -23,7 +23,6 @@ export function App() {
 }
 
 export function AppRoutes() {
-  console.log("AppRoutes with SessionProvider");
   return (
     <SessionProvider> 
     <Routes>
