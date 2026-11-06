@@ -6,7 +6,8 @@ export type Capability =
   | "cohorts.read"
   | "assignments.read"
   | "submissions.read"
-  | "reviews.read";
+  | "reviews.read"
+  | "weeks.read";
 
 export type SessionUser = {
   id: string;
@@ -56,6 +57,67 @@ export type Assignment = {
   title: string;
   status: "draft" | "published" | "closed";
   engagementId: string;
+};
+
+export type CohortRef = {
+  id: string;
+  slug: string;
+  name: string;
+  nameAr?: string | null;
+  currentWeekNumber: number;
+  startsOn: string;
+  endsOn: string;
+};
+
+export type WeekResourceItem = {
+  title: string;
+  url: string;
+  layers: string;
+  format: "Read" | "Watch" | "Listen" | string;
+  time: string;
+  why: string;
+};
+
+export type WeekResources = {
+  required: WeekResourceItem[];
+  assignment: WeekResourceItem[];
+  alternative: WeekResourceItem[];
+};
+
+export type WeekAppliedLayer = {
+  layer: string;
+  details: string;
+};
+
+export type WeekAssignment = {
+  id?: string;
+  title: string;
+  summary: string;
+  status: "draft" | "published" | "closed";
+  labels: string[];
+  detailsMd: string;
+};
+
+export type Week = {
+  weekNumber: number;
+  title: string;
+  tagline?: string;
+  concept: string;
+  guidingQuestion: string;
+  startDate: string;
+  endDate: string;
+  status: "completed" | "active" | "upcoming" | "draft";
+  isCurrent: boolean;
+  isLocked: boolean;
+  cohort: CohortRef;
+  bigIdea: string;
+  outcomes: string[];
+  coreConcepts: string[];
+  appliedThroughTheStack: WeekAppliedLayer[];
+  assignment: WeekAssignment | null;
+  resources: WeekResources;
+  reflectionQuestion: string;
+  prerequisites: string[];
 };
 
 export type ApiError = {
@@ -150,6 +212,26 @@ export function createElWarshaClient(options: ElWarshaClientOptions) {
     listProducts: () => request<Product[]>("/api/v1/products"),
     listEngagements: () => request<Engagement[]>("/api/v1/engagements"),
     listAssignments: () => request<Assignment[]>("/api/v1/assignments"),
+    listCohortWeeks: (cohortSlug: string, params?: { locale?: Locale }) =>
+      request<Week[]>(
+        params?.locale
+          ? `/api/v1/cohorts/${cohortSlug}/weeks?locale=${params.locale}`
+          : `/api/v1/cohorts/${cohortSlug}/weeks`,
+      ),
+    getCohortWeek: (
+      cohortSlug: string,
+      weekNumber: number,
+      params?: { locale?: Locale },
+    ) =>
+      request<Week>(
+        params?.locale
+          ? `/api/v1/cohorts/${cohortSlug}/weeks/${weekNumber}?locale=${params.locale}`
+          : `/api/v1/cohorts/${cohortSlug}/weeks/${weekNumber}`,
+      ),
+    listWeeks: (params?: { locale?: Locale }) =>
+      request<Week[]>(
+        params?.locale ? `/api/v1/weeks?locale=${params.locale}` : "/api/v1/weeks",
+      ),
     applyCohort: (cohortSlug: string, input: ApplyCohortInput) =>
       request<CohortApplicationResponse>(`/api/v1/cohorts/${cohortSlug}/applications`, {
         method: "POST",
