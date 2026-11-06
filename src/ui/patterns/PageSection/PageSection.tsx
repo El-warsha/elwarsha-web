@@ -6,7 +6,7 @@ export function PageSection({
   children,
   eyebrow,
   title,
-}: PropsWithChildren<{ eyebrow?: string; title: string }>) {
+}: PropsWithChildren<{ eyebrow?: string; title: React.ReactNode }>) {
   return (
     <section className={styles.section}>
       {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
