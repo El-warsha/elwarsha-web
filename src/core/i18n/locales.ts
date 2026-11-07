@@ -90,6 +90,7 @@ export const messages = {
       products: "المنتجات",
       cohorts: "الدفعات",
       assignments: "التكليفات",
+  labelPickerTitle: "تصفية حسب تصنيف المهمة",
       week: "الأسبوع",
       weeks: "الأسابيع",
       weeksOverview: "نظرة عامة على أسابيع الدفعة",
@@ -244,6 +245,7 @@ export const messages = {
       cohorts: "Cohorts",
       assignments: "Assignments",
       week: "Week",
+      labelPickerTitle:'Filter by Task Label',
       weeks: "Weeks",
       weeksOverview: "Cohort Weeks Overview",
       weeksSubtitle:

@@ -1,0 +1,14 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--size-button-sm);
+  padding: 0 var(--spacing-12);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-brand);
+  color: var(--color-text-brand);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
