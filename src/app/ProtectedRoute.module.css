@@ -9,18 +9,13 @@
 .panel {
   max-width: 520px;
   width: 100%;
-  background: var(--paper);
-  border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  padding: var(--space-6);
+  padding: var(--space-3);
+  background-color: var(--color-surface-default);
   box-shadow: 4px 4px 0 var(--ink);
   outline: none;
 }
 
-.panel:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 4px;
-}
 
 .eyebrow {
   font-family: var(--font-mono);
