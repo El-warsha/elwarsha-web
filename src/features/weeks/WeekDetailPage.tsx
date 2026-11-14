@@ -15,6 +15,7 @@ import { WeekReflectionSection } from "./components/WeekReflectionSection.js";
 import { WeekPagination } from "./components/WeekPagination.js";
 
 import styles from "./WeekDetailPage.module.css";
+import { SubmissionStatusCard } from "../submissions/components/SubmissionStatusCard.js";
 
 export function WeekDetailPage({ locale }: { locale: Locale }) {
   const copy = messages[locale];
@@ -77,9 +78,11 @@ export function WeekDetailPage({ locale }: { locale: Locale }) {
         <span aria-hidden="true">{locale === "ar" ? "→" : "←"}</span>
         <span>{copy.portal.backToWeeks}</span>
       </Link>
-
+      
       <WeekHeader week={week} copy={copy} />
 
+      <SubmissionStatusCard weekNumber={weekNumber} cohortSlug={cohortSlug} locale={locale} />
+      
       <WeekOutcomesList outcomes={week.outcomes} title={copy.portal.learningOutcomes} />
 
       <WeekConceptsGrid
