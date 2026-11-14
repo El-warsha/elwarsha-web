@@ -154,6 +154,16 @@ export const messages = {
       submissionMergedBody:
         "تم دمج طلب الدمج الخاص بك في الفرع الرئيسي واكتمل تسليم الأسبوع بنجاح.",
       viewPrOnGithub: "عرض طلب الدمج على GitHub",
+      submissionsStatusMerged: "تم الدمج",
+      submissionsStatusInReview: "قيد المراجعة",
+      submissionsStatusDraft: "مسودة",
+      githubRefresh: "تحديث من GitHub",
+      progress: "مستوى التقدم",
+      submissionErrorTitle: "حدث خطأ أثناء جلب حالة التسليم من GitHub",
+      submissionErrorBody:
+        "تعذر جلب حالة التسليم من GitHub. حاول تحديث الصفحة أو إعادة المحاولة لاحقاً.",
+      
+      noSubmissions: "لم يتم إعداد أي مستودعات لهذا المنتج بعد.",
     },
     apply: {
       eyebrow: "الدفعة القادمة / Cohort 02",
@@ -317,6 +327,15 @@ export const messages = {
       submissionMergedBody:
         "Your pull request has been merged into main. Week assignment completed!",
       viewPrOnGithub: "View Pull Request on GitHub",
+      submissionsStatusMerged: "Merged",
+      submissionsStatusInReview: "In Review",
+      submissionsStatusDraft: "Draft",
+      githubRefresh: "Refresh from GitHub",
+      progress: "your Progress",
+      submissionErrorTitle: "Error fetching submission status from GitHub",
+      submissionErrorBody:
+        "Could not fetch submission status from GitHub. Try refreshing the page or retrying later.",
+      noSubmissions: "No repositories are configured for this product yet.",  
     },
     apply: {
       eyebrow: "Upcoming Cohort / Cohort 02",

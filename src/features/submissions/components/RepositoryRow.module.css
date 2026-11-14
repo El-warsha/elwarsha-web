@@ -1,0 +1,96 @@
+
+.submissionCardRepo {
+  padding: var(--spacing-16);
+  background: var(--color-surface-muted);
+  border: var(--size-border-thin) dashed var(--color-border-default);
+  border-radius: var(--radius-md);
+}
+
+.submissionCardRepoHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+}
+
+.submissionCardRepoLink {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-brand-primary);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.submissionCardRepoLink:hover {
+  color: var(--color-text-brand);
+}
+
+
+.submissionCardList {
+  display: grid;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+.submissionCardBody {
+  margin: var(--spacing-12) 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+.submissionCardBody code {
+  padding: 1px var(--spacing-4);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--color-text-primary);
+  background: var(--color-surface-brand);
+  border: var(--size-border-thin) solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.submissionCardPrLink {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--color-text-brand);
+}
+
+
+.submissionCardBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--spacing-12);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: var(--size-border-thin) solid var(--color-border-default);
+  border-radius: var(--radius-full);
+}
+
+.badgeDraft {
+  color: var(--color-text-secondary);
+  background: var(--color-surface-default);
+  border-style: dashed;
+}
+
+.badgeInReview {
+  color: var(--color-text-brand);
+  background: var(--color-surface-brand);
+  border-color: var(--color-text-brand);
+}
+
+.badgeMerged {
+  color: var(--color-text-success);
+  background: var(--color-surface-success);
+  border-color: var(--color-text-success);
+}

@@ -1,0 +1,125 @@
+.submissionCard {
+  margin-block: var(--spacing-24);
+  padding: var(--spacing-24);
+  background: var(--color-surface-default);
+  color: var(--color-text-primary);
+  border: var(--size-border-thin) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-hard);
+  font-family: var(--font-body);
+}
+
+.submissionCardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  margin-bottom: var(--spacing-16);
+}
+
+.submissionCardEyebrow {
+  margin: 0 0 var(--spacing-4);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-brand);
+}
+
+.submissionCardTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.submissionCardRefresh {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-height: var(--size-button-sm);
+  padding: 0 var(--spacing-16);
+  font: 600 0.85rem var(--font-body);
+  color: var(--color-text-on-action);
+  background: var(--color-action-primary);
+  border: var(--size-border-thin) solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.submissionCardRefresh:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 var(--color-brand-primary);
+}
+
+.submissionCardRefresh:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.submissionCardSpin {
+  display: inline-block;
+}
+
+.isSpinning {
+  animation: submissionCardSpin 0.9s linear infinite;
+}
+
+@keyframes submissionCardSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submissionCardList {
+  display: grid;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.submissionCardNote {
+  margin: 0;
+  padding: var(--spacing-12) var(--spacing-16);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-muted);
+  border: var(--size-border-thin) dashed var(--line);
+  border-radius: var(--radius-md);
+}
+
+.submissionCardNoteError {
+  color: var(--color-text-brand);
+  background: var(--color-surface-brand);
+  border-color: var(--color-text-brand);
+}
+
+.submissionCard a:focus-visible,
+.submissionCard button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .submissionCard {
+    padding: var(--spacing-16);
+  }
+
+  .submissionCardRefresh {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .isSpinning {
+    animation: none;
+  }
+
+  .submissionCardRefresh {
+    transition: none;
+  }
+}
