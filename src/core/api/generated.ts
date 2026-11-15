@@ -17,3 +17,18 @@ export {
   type WeekAppliedLayer,
   type WeekAssignment,
 } from "@elwarsha/api-client";
+
+export type SubmissionStatus = 'draft' | 'in_review' | 'merged';
+
+export interface RepositorySubmissionItem {
+  repositoryName: string;
+  status: SubmissionStatus;
+  prUrl: string | null;
+  prNumber: number | null;
+}
+
+export interface AssignmentSubmissionsResponse {
+  assignmentId: string;
+  weekNumber: number;
+  submissions: RepositorySubmissionItem[];
+}

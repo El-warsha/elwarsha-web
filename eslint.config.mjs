@@ -43,4 +43,29 @@ export default tseslint.config(
       ],
     },
   },
+  // 🔹 القاعدة الجديدة لمنع استيراد الـ API Client المباشر
+  {
+    files: ["src/features/**/*", "src/ui/**/*"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "@elwarsha/api-client",
+              message:
+                "Do not import @elwarsha/api-client directly in UI or Features. Use @entities or @core/api instead.",
+            },
+          ],
+          patterns: [
+            {
+              group: ["@elwarsha/api-client*"],
+              message:
+                "Do not import @elwarsha/api-client directly in UI or Features. Use @entities or @core/api instead.",
+            },
+          ],
+        },
+      ],
+    },
+  }
 );

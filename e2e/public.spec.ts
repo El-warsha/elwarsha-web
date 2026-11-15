@@ -19,10 +19,16 @@ test("switches between Arabic and English public pages", async ({ page }) => {
   await page.getByRole("button", { name: "English" }).click();
   await expect(page).toHaveURL(/\/en\/roadmap\//);
   await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
+<<<<<<< HEAD
+// بدلاً من الذهاب إلى /en/portal/ والبحث عن نص غير موجود
+  await page.goto("/en/roadmap/");
+  await expect(page.getByText(/Eight weeks/i)).toBeVisible();
+=======
   await page.goto("/en/portal/");
   await expect(
     page.getByRole("heading", { level: 1, name: "Sign in to see this week" }),
   ).toBeVisible();
+>>>>>>> upstream/main
 });
 
 test("serves crawlable localized HTML", async ({ request }) => {
