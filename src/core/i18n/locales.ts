@@ -154,6 +154,8 @@ export const messages = {
       submissionMergedBody:
         "تم دمج طلب الدمج الخاص بك في الفرع الرئيسي واكتمل تسليم الأسبوع بنجاح.",
       viewPrOnGithub: "عرض طلب الدمج على GitHub",
+      refreshFromGithub: "↻ تحديث من GitHub",
+submissionsError: "تعذّر جلب حالة الـ PRs من GitHub.",
     },
     apply: {
       eyebrow: "الدفعة القادمة / Cohort 02",
@@ -317,6 +319,8 @@ export const messages = {
       submissionMergedBody:
         "Your pull request has been merged into main. Week assignment completed!",
       viewPrOnGithub: "View Pull Request on GitHub",
+      refreshFromGithub: "↻ Refresh from GitHub",
+submissionsError: "Could not load PR status from GitHub.",
     },
     apply: {
       eyebrow: "Upcoming Cohort / Cohort 02",

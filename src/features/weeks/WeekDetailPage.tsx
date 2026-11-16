@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-
+import { SubmissionStatusCard } from "./components/SubmissionStatusCard.js";
 import { messages, type Locale } from "@core/i18n";
 import { PageSection } from "@ui/patterns/PageSection/PageSection";
 import { StatePanel } from "@ui/patterns/StatePanel/StatePanel";
@@ -79,7 +79,7 @@ export function WeekDetailPage({ locale }: { locale: Locale }) {
       </Link>
 
       <WeekHeader week={week} copy={copy} />
-
+      <SubmissionStatusCard locale={locale} cohortSlug={cohortSlug} weekNumber={weekNum} />
       <WeekOutcomesList outcomes={week.outcomes} title={copy.portal.learningOutcomes} />
 
       <WeekConceptsGrid

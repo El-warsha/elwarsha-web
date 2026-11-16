@@ -12,6 +12,11 @@ vi.mock("@core/api", () => ({
   api: {
     getCohortWeek: vi.fn(),
   },
+  getAssignmentSubmissions: vi.fn().mockResolvedValue({
+  assignmentId: "a1",
+  weekNumber: 1,
+  submissions: [],
+}),
 }));
 
 describe("WeekDetailPage", () => {
